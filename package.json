@@ -1,0 +1,16 @@
+{
+  "name": "library-student",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.14"
+  }
+}
