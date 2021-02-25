@@ -1,0 +1,63 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "library-student Application API"
+    },
+    "components": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "mongodb"
+        },
+        {
+            "name": "mysql"
+        }
+    ],
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "paths": {
+        "/mongodb": {
+            "get": {
+                "summary": "Get some mongodb response",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "tags": [
+                    "mongodb"
+                ]
+            }
+        },
+        "/mysql": {
+            "get": {
+                "summary": "Get some mysql response",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        }
+    }
+}

@@ -1,12 +1,16 @@
 // @ts-check
-import express from "express";
+import express, { request, response } from "express";
 import mongoose from "mongoose";
-// import Auther from "./models/Author.js";
+import swaggerUi from "swagger-ui-express";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
+import swaggerDocument from "./docs/swagger.json";
 
 mongoose
-  .connect("mongodb://localhost:27017/books-library", {
+  .connect(process.env.MONGODB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -14,9 +18,15 @@ mongoose
   .then(() => console.log("MongoDB is ready ..."))
   .catch((error) => console.log(error));
 
-const port = 3000;
-app.listen(port, () => console.log("Server is running on port: " + port));
+app.use(cors());
+app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Auther.find({ name: "Basheer" })
-//   .then((res) => console.log(res))
-//   .catch((error) => console.log(error));
+// Testing routes
+app.get("/mongodb", (request, response) =>
+  response.send("hello from mongodb !!")
+);
+app.get("/mysql", (request, response) => response.send("hello from mysql !!"));
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log("Server is running on port: " + port));

@@ -4,13 +4,19 @@
   "description": "",
   "main": "app.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --experimental-json-modules app.mjs"
   },
   "author": "",
   "type": "module",
   "license": "ISC",
+  "engines": {
+    "node": "14.15.1"
+  },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.14"
+    "mongoose": "^5.11.14",
+    "swagger-ui-express": "^4.1.6"
   }
 }
