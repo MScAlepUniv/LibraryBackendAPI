@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.mjs",
   "scripts": {
-    "start": "nodemon --experimental-json-modules app.mjs"
+    "start": "nodemon --experimental-json-modules app.mjs",
+    "heroku-postbuild": "prisma generate --schema=./mysql/prisma/schema.prisma"
   },
   "author": "",
   "type": "module",
