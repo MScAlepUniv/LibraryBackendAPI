@@ -27,31 +27,112 @@
         }
     ],
     "paths": {
-        "/mongodb": {
-            "get": {
-                "summary": "Get some mongodb response",
+        "/mysql/auth/register": {
+            "post": {
+                "security": [],
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Name": {
+                                        "type": "string",
+                                        "example": "Basheer"
+                                    },
+                                    "Father_name": {
+                                        "type": "string",
+                                        "example": "Basheer"
+                                    },
+                                    "Last_name": {
+                                        "type": "string",
+                                        "example": "Shahrour"
+                                    },
+                                    "Birthdate": {
+                                        "type": "string",
+                                        "example": "1997/2/13"
+                                    },
+                                    "Address": {
+                                        "type": "string",
+                                        "example": "Aleppo"
+                                    },
+                                    "Job": {
+                                        "type": "string",
+                                        "example": "developer"
+                                    },
+                                    "Qualification": {
+                                        "type": "string",
+                                        "example": "Computer Eng."
+                                    },
+                                    "user_name": {
+                                        "type": "string",
+                                        "example": "basheer-shahrour"
+                                    },
+                                    "pass": {
+                                        "type": "string",
+                                        "example": "123abc"
+                                    },
+                                    "subscriptioncard_info": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Subscription_id": {
+                                                "type": "integer",
+                                                "example": 125487
+                                            },
+                                            "State": {
+                                                "type": "string",
+                                                "example": "active"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Ok"
                     },
-                    "404": {
-                        "description": "Not found"
+                    "409": {
+                        "description": "Visitor existe"
                     }
                 },
                 "tags": [
-                    "mongodb"
+                    "mysql"
                 ]
             }
         },
-        "/mysql": {
-            "get": {
-                "summary": "Get some mysql response",
+        "/mysql/auth/login": {
+            "post": {
+                "security": [],
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user_name": {
+                                        "type": "string",
+                                        "example": "basheer-shahrour"
+                                    },
+                                    "pass": {
+                                        "type": "string",
+                                        "example": "123abc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Ok"
                     },
                     "404": {
-                        "description": "Not found"
+                        "description": "Visitor not found"
                     }
                 },
                 "tags": [

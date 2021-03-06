@@ -1,5 +1,4 @@
-// @ts-check
-import express, { request, response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
@@ -8,6 +7,8 @@ dotenv.config();
 
 const app = express();
 import swaggerDocument from "./docs/swagger.json";
+
+import mysqlAuthRouter from "./routers/mysql.js";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
@@ -20,13 +21,14 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
+  next();
+});
 
-// Testing routes
-app.get("/mongodb", (request, response) =>
-  response.send("hello from mongodb !!")
-);
-app.get("/mysql", (request, response) => response.send("hello from mysql !!"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/mysql/auth", mysqlAuthRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server is running on port: " + port));

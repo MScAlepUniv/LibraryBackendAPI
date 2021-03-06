@@ -1,0 +1,252 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_DATABASE_URL")
+}
+
+model author_publication {
+  Author_id           Int
+  Published_id        Int
+  Rate_of_associating Int
+  authors             authors      @relation(fields: [Author_id], references: [Author_id])
+  publications        publications @relation(fields: [Published_id], references: [Publication_id])
+
+  @@id([Author_id, Published_id])
+  @@index([Author_id], name: "Author_id")
+  @@index([Published_id], name: "Published_id")
+}
+
+model authors {
+  Author_id          Int                  @id @default(autoincrement())
+  Name               String               @db.VarChar(50)
+  Last_name          String               @db.VarChar(50)
+  Birthday           DateTime?            @db.Date
+  Place_of_Birth     String?              @db.VarChar(50)
+  Address            String?              @db.VarChar(100)
+  date_of_birth      DateTime?            @db.Date
+  Biography          String?              @db.VarChar(300)
+  author_publication author_publication[]
+}
+
+model availabilities {
+  Availability_id    Int                  @id @default(autoincrement())
+  Availability_type  String               @db.VarChar(50)
+  ownershiptransfers ownershiptransfers[]
+}
+
+model borrowingrecords {
+  Borrow_id          Int       @id @default(autoincrement())
+  Visitor_id         Int
+  Employee_id        Int
+  Copy_id            Int
+  date_Borrow        DateTime  @db.Date
+  type_Borrow        String    @db.VarChar(50)
+  date_return        DateTime  @db.Date
+  date_actual_return DateTime  @db.Date
+  copies             copies    @relation(fields: [Copy_id], references: [Copy_id])
+  employees          employees @relation(fields: [Employee_id], references: [Employee_id])
+
+  @@index([Copy_id], name: "Copy_id")
+  @@index([Employee_id], name: "Employee_id")
+}
+
+model classes {
+  Class_id       Int              @id @default(autoincrement())
+  Class_name     String           @db.VarChar(50)
+  discountoffers discountoffers[]
+  publications   publications[]
+}
+
+model copies {
+  Copy_id            Int                  @id @default(autoincrement())
+  Published_id       Int
+  State_id           Int
+  current_situation  String               @db.VarChar(50)
+  publications       publications         @relation(fields: [Published_id], references: [Publication_id])
+  states             states               @relation(fields: [State_id], references: [State_id])
+  borrowingrecords   borrowingrecords[]
+  ownershiptransfers ownershiptransfers[]
+
+  @@index([Published_id], name: "Published_id")
+  @@index([State_id], name: "State_id")
+}
+
+model customeraccounts {
+  Account_Id    Int        @id @default(autoincrement())
+  BankName      String     @db.VarChar(50)
+  Address       String     @db.VarChar(100)
+  BankAccountNo String     @db.VarChar(100)
+  visitor_Id    Int
+  vsitors       vsitors    @relation(fields: [visitor_Id], references: [Visitor_id])
+  invoices      invoices[]
+
+  @@index([visitor_Id], name: "visitor_Id")
+}
+
+model discountoffers {
+  Offer_id         Int          @id @default(autoincrement())
+  rate_of_discount Int
+  Quantity         Int
+  class_id         Int
+  Publisher_id     Int
+  publications     publications @relation(fields: [Publisher_id], references: [Publication_id])
+  classes          classes      @relation(fields: [class_id], references: [Class_id])
+
+  @@index([Publisher_id], name: "Publisher_id")
+  @@index([class_id], name: "class_id")
+}
+
+model employees {
+  Employee_id                    Int                @id @default(autoincrement())
+  Name                           String             @db.VarChar(50)
+  Father_name                    String             @db.VarChar(50)
+  Last_name                      String             @db.VarChar(50)
+  Birthday                       DateTime           @db.Date
+  Address                        String             @db.VarChar(100)
+  Qualification                  String             @db.VarChar(100)
+  Job                            String             @db.VarChar(50)
+  date_of_start                  DateTime           @db.Date
+  date_of_end                    DateTime           @db.Date
+  sale_permission                Boolean            @db.Bit(1)
+  borrowing_permission           Boolean?           @db.Bit(1)
+  permission_granted_permissions Boolean            @db.Bit(1)
+  user_name                      String             @db.VarChar(50)
+  pass                           String             @db.VarChar(20)
+  borrowingrecords               borrowingrecords[]
+  requests                       requests[]         @ignore
+}
+
+model invoices {
+  Invoice_Id         Int                  @id @default(autoincrement())
+  Price              Float
+  CustomerAccount_Id Int
+  TotalDiscount      Float
+  FinalPrice         Float
+  customeraccounts   customeraccounts     @relation(fields: [CustomerAccount_Id], references: [Account_Id])
+  ownershiptransfers ownershiptransfers[]
+  refunds            refunds[]
+
+  @@index([CustomerAccount_Id], name: "CustomerAccount_Id")
+}
+
+model ownershiptransfers {
+  id                                                 Int            @id @default(autoincrement())
+  copy_id                                            Int
+  data                                               DateTime       @db.Date
+  Availability_id                                    Int
+  beneficiary                                        String?        @db.VarChar(50)
+  TransferType                                       String         @db.VarChar(50)
+  Invoice_id                                         Int
+  Refund_Id                                          Int
+  availabilities                                     availabilities @relation(fields: [Availability_id], references: [Availability_id])
+  invoices                                           invoices       @relation(fields: [Invoice_id], references: [Invoice_Id])
+  refunds_ownershiptransfers_Refund_IdTorefunds      refunds        @relation("ownershiptransfers_Refund_IdTorefunds", fields: [Refund_Id], references: [Refund_Id])
+  copies                                             copies         @relation(fields: [copy_id], references: [Copy_id])
+  refunds_ownershiptransfersTorefunds_OldTransfer_Id refunds[]      @relation("ownershiptransfersTorefunds_OldTransfer_Id")
+
+  @@index([Availability_id], name: "Availability_id")
+  @@index([Invoice_id], name: "Invoice_id")
+  @@index([Refund_Id], name: "Refund_Id")
+  @@index([TransferType], name: "TransferType_Id")
+  @@index([copy_id], name: "copy_id")
+}
+
+model publications {
+  Publication_id      Int                  @id @default(autoincrement())
+  ISBN                Int?
+  Tittel              String               @db.VarChar(50)
+  date_of_Publishing  DateTime?            @db.Date
+  publisher_id        Int?
+  Class_id            Int?
+  Keywords            String?              @db.VarChar(100)
+  num_of_pages        Int?
+  subject_id          Int?
+  purchase_price_copy Int?
+  for_sale            Bytes?               @db.Bit(5)
+  sale_price_copy     Int?
+  classes             classes?             @relation(fields: [Class_id], references: [Class_id])
+  publishers          publishers?          @relation(fields: [publisher_id], references: [Publisher_id])
+  subjects            subjects?            @relation(fields: [subject_id], references: [Subject_id])
+  author_publication  author_publication[]
+  copies              copies[]
+  discountoffers      discountoffers[]
+
+  @@index([Class_id], name: "Class_id")
+  @@index([publisher_id], name: "publisher_id")
+  @@index([subject_id], name: "subject_id")
+}
+
+model publishers {
+  Publisher_id Int            @id @default(autoincrement())
+  Name         String         @db.VarChar(50)
+  Address      String         @db.VarChar(100)
+  specialty    String         @db.VarChar(50)
+  publications publications[]
+}
+
+model refunds {
+  Refund_Id                                                     Int                  @id @default(autoincrement())
+  Price                                                         Float
+  OldTransfer_Id                                                Int
+  Invoice_Id                                                    Int
+  invoices                                                      invoices             @relation(fields: [Invoice_Id], references: [Invoice_Id])
+  ownershiptransfers_ownershiptransfersTorefunds_OldTransfer_Id ownershiptransfers   @relation("ownershiptransfersTorefunds_OldTransfer_Id", fields: [OldTransfer_Id], references: [id])
+  ownershiptransfers_ownershiptransfers_Refund_IdTorefunds      ownershiptransfers[] @relation("ownershiptransfers_Refund_IdTorefunds")
+
+  @@index([Invoice_Id], name: "Invoice_Id")
+  @@index([OldTransfer_Id], name: "OldTransfer_Id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model requests {
+  Request_Id         Int
+  Employee_Id        Int
+  PublicationName    String    @db.VarChar(100)
+  NotAvailableReason String    @db.VarChar(100)
+  Date               DateTime  @db.Date
+  employees          employees @relation(fields: [Employee_Id], references: [Employee_id])
+
+  @@index([Employee_Id], name: "Employee_Id")
+  @@ignore
+}
+
+model states {
+  State_id   Int      @id @default(autoincrement())
+  State_type String   @db.VarChar(50)
+  copies     copies[]
+}
+
+model subjects {
+  Subject_id       Int            @id @default(autoincrement())
+  Subject_descript String         @db.VarChar(100)
+  publications     publications[]
+}
+
+model subscriptioncards {
+  Card_id         Int       @id @default(autoincrement())
+  Subscription_id Int
+  State           String    @db.VarChar(50)
+  vsitors         vsitors[]
+}
+
+model vsitors {
+  Visitor_id        Int                @id @default(autoincrement())
+  Name              String             @db.VarChar(50)
+  Father_name       String             @db.VarChar(50)
+  Last_name         String             @db.VarChar(50)
+  Birthdate         DateTime           @db.Date
+  visitor_card_id   Int
+  Address           String             @db.VarChar(100)
+  Job               String             @db.VarChar(50)
+  Subscription_date DateTime           @db.Date
+  Qualification     String             @db.VarChar(100)
+  user_name         String?            @db.VarChar(50)
+  pass              String?            @db.VarChar(20)
+  subscriptioncards subscriptioncards  @relation(fields: [visitor_card_id], references: [Card_id])
+  customeraccounts  customeraccounts[]
+
+  @@index([visitor_card_id], name: "visitor_card_id")
+}
