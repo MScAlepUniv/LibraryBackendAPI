@@ -7,17 +7,22 @@ export default class AuthController {
   async login(req, res) {
     const { user_name, pass } = req.body;
     try {
-      const visitor = await prisma.vsitors.findFirst({
+      let user = await prisma.vsitors.findFirst({
         where: { user_name, pass },
       });
-      if (!visitor) return res.sendStatus(404);
+      if (!user) {
+        user = await prisma.employees.findFirst({
+          where: { user_name, pass },
+        });
+        if (!user) return res.sendStatus(404);
+      }
       const accToken = this.getToken(process.env.JWT_KEY, {
-        visitor_card_id: visitor.visitor_card_id,
-        Name: visitor.Name,
+        user_name: user.user_name,
+        id: user.id,
       });
-      delete visitor.pass;
+      delete user.pass;
 
-      res.send({ ...visitor, accToken });
+      res.send({ ...user, acc_token: accToken });
     } catch (error) {
       console.log(error);
       res.sendStatus(404);
@@ -26,16 +31,16 @@ export default class AuthController {
 
   async register(req, res) {
     const {
-      Name,
-      Father_name,
-      Last_name,
-      Birthdate,
-      Address,
-      Job,
-      Qualification,
+      name,
+      father_name,
+      last_name,
+      birthdate,
+      address,
+      job,
+      qualification,
       user_name,
       pass,
-      subscriptioncard_info: { Subscription_id, State },
+      subscriptioncard_info: { subscription_id, state },
     } = req.body;
     try {
       let visitor = await prisma.vsitors.findFirst({ where: { user_name } });
@@ -43,18 +48,18 @@ export default class AuthController {
 
       visitor = await prisma.vsitors.create({
         data: {
-          Name,
-          Father_name,
-          Last_name,
-          Birthdate: new Date(Birthdate),
-          Address,
-          Job,
+          Name: name,
+          Father_name: father_name,
+          Last_name: last_name,
+          Birthdate: new Date(birthdate),
+          Address: address,
+          Job: job,
           Subscription_date: new Date(),
-          Qualification,
+          Qualification: qualification,
           user_name,
           pass,
           subscriptioncards: {
-            create: { Subscription_id, State },
+            create: { Subscription_id: subscription_id, State: state },
           },
         },
       });
@@ -62,10 +67,10 @@ export default class AuthController {
 
       const accToken = this.getToken(process.env.JWT_KEY, {
         visitor_card_id: visitor.visitor_card_id,
-        Name,
+        Name: name,
       });
 
-      res.send({ ...visitor, accToken });
+      res.send({ ...visitor, acc_token: accToken });
     } catch (error) {
       console.log(error);
       res.sendStatus(404);
@@ -73,9 +78,6 @@ export default class AuthController {
   }
 
   getToken(key, user) {
-    return jwt.sign(
-      { visitor_card_id: user.visitor_card_id, name: user.Name },
-      key
-    );
+    return jwt.sign({ id: user.id, user_name: user.user_name }, key);
   }
 }

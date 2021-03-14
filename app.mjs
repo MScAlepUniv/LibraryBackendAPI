@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 import swaggerDocument from "./docs/swagger.json";
 
-import mysqlAuthRouter from "./routers/mysql.js";
+import mysqlAuthRouter from "./routers/mysql/auth.js";
+import mysqlAdminRouter from "./routers/mysql/admin.js";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/mysql/auth", mysqlAuthRouter);
+app.use("/mysql/admin", mysqlAdminRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server is running on port: " + port));

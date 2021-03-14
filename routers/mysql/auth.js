@@ -1,5 +1,5 @@
 import express from "express";
-import AuthController from "../mysql/controllers/AuthController.js";
+import AuthController from "../../mysql/controllers/AuthController.js";
 const router = express.Router();
 
 const authController = new AuthController();

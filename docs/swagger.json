@@ -37,31 +37,31 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "Name": {
+                                    "name": {
                                         "type": "string",
                                         "example": "Basheer"
                                     },
-                                    "Father_name": {
+                                    "father_name": {
                                         "type": "string",
                                         "example": "Basheer"
                                     },
-                                    "Last_name": {
+                                    "last_name": {
                                         "type": "string",
                                         "example": "Shahrour"
                                     },
-                                    "Birthdate": {
+                                    "birthdate": {
                                         "type": "string",
                                         "example": "1997/2/13"
                                     },
-                                    "Address": {
+                                    "address": {
                                         "type": "string",
                                         "example": "Aleppo"
                                     },
-                                    "Job": {
+                                    "job": {
                                         "type": "string",
                                         "example": "developer"
                                     },
-                                    "Qualification": {
+                                    "qualification": {
                                         "type": "string",
                                         "example": "Computer Eng."
                                     },
@@ -76,11 +76,11 @@
                                     "subscriptioncard_info": {
                                         "type": "object",
                                         "properties": {
-                                            "Subscription_id": {
+                                            "subscription_id": {
                                                 "type": "integer",
                                                 "example": 125487
                                             },
-                                            "State": {
+                                            "state": {
                                                 "type": "string",
                                                 "example": "active"
                                             }
@@ -114,6 +114,90 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
+                                    "user_name": {
+                                        "type": "string",
+                                        "example": "basheer-shahrour"
+                                    },
+                                    "pass": {
+                                        "type": "string",
+                                        "example": "123abc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404": {
+                        "description": "Visitor not found"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createEmployee": {
+            "post": {
+                "security": [],
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Basheer"
+                                    },
+                                    "father_name": {
+                                        "type": "string",
+                                        "example": "Basheer"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Shahrour"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "example": "1997/2/13"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Aleppo"
+                                    },
+                                    "job": {
+                                        "type": "string",
+                                        "example": "developer"
+                                    },
+                                    "qualification": {
+                                        "type": "string",
+                                        "example": "Computer Eng."
+                                    },
+                                    "date_of_start": {
+                                        "type": "string",
+                                        "example": "2020/2/2"
+                                    },
+                                    "date_of_end": {
+                                        "type": "string",
+                                        "example": "2021/1/2"
+                                    },
+                                    "sale_permission": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "borrowing_permission": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "permission_granted_permissions": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
                                     "user_name": {
                                         "type": "string",
                                         "example": "basheer-shahrour"
