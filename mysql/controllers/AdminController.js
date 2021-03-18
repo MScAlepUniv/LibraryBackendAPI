@@ -20,8 +20,11 @@ export default class AdminController {
       user_name,
       pass,
     } = req.body;
+    let employee;
     try {
-      const employee = await prisma.employees.create({
+      employee = await prisma.employees.findFirst({ where: { user_name } });
+      if (employee) return res.sendStatus(409);
+      employee = await prisma.employees.create({
         data: {
           Name: name,
           Father_name: father_name,
