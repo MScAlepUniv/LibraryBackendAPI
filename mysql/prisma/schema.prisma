@@ -115,6 +115,7 @@ model employees {
   permission_granted_permissions Boolean            @db.Bit(1)
   user_name                      String             @db.VarChar(50)
   pass                           String             @db.VarChar(20)
+  is_admin                       Boolean            @default(dbgenerated("b'0'")) @db.Bit(1)
   borrowingrecords               borrowingrecords[]
   requests                       requests[]         @ignore
 }

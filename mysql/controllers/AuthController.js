@@ -7,6 +7,7 @@ export default class AuthController {
   async login(req, res) {
     const { user_name, pass } = req.body;
     try {
+      let isAdmin = false;
       let user = await prisma.vsitors.findFirst({
         where: { user_name, pass },
       });
@@ -15,12 +16,16 @@ export default class AuthController {
           where: { user_name, pass },
         });
         if (!user) return res.sendStatus(404);
+        isAdmin = user.is_admin;
       }
+      console.log(user.is_admin);
       const accToken = this.getToken(process.env.JWT_KEY, {
         user_name: user.user_name,
         id: user.id,
+        is_admin: isAdmin,
       });
       delete user.pass;
+      delete user.is_admin;
 
       res.send({ ...user, acc_token: accToken });
     } catch (error) {
@@ -68,6 +73,7 @@ export default class AuthController {
       const accToken = this.getToken(process.env.JWT_KEY, {
         visitor_card_id: visitor.visitor_card_id,
         Name: name,
+        is_admin: false,
       });
 
       res.send({ ...visitor, acc_token: accToken });
@@ -78,6 +84,25 @@ export default class AuthController {
   }
 
   getToken(key, user) {
-    return jwt.sign({ id: user.id, user_name: user.user_name }, key);
+    return jwt.sign({ is_admin: user.is_admin.toString() }, key);
+  }
+
+  authenticateJWT(req, res, next) {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+      jwt.verify(token, process.env.JWT_KEY, (error, user) => {
+        if (error) return res.sendStatus(403);
+        req.user = user;
+        next();
+      });
+    } else res.sendStatus(401);
+  }
+
+  adminChecker(req, res, next) {
+    if (req.user.is_admin !== "true")
+      return res.status(401).json({ message: "Unauthorized" });
+    next();
   }
 }

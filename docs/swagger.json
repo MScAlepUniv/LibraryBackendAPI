@@ -142,7 +142,6 @@
         },
         "/mysql/admin/createEmployee": {
             "post": {
-                "security": [],
                 "summary": "",
                 "requestBody": {
                     "content": {

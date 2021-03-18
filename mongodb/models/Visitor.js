@@ -59,5 +59,5 @@ const visitorSchema = new Schema(
 
 class Visitor {}
 
-autherSchema.loadClass(Visitor);
+visitorSchema.loadClass(Visitor);
 export default mongoose.model("Visitor", visitorSchema);
