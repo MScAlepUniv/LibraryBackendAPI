@@ -20,8 +20,7 @@ export default class AuthController {
       }
       console.log(user.is_admin);
       const accToken = this.getToken(process.env.JWT_KEY, {
-        user_name: user.user_name,
-        id: user.id,
+        id: user.Visitor_id ? user.Visitor_id : user.Employee_id,
         is_admin: isAdmin,
       });
       delete user.pass;
@@ -71,8 +70,7 @@ export default class AuthController {
       delete visitor.pass;
 
       const accToken = this.getToken(process.env.JWT_KEY, {
-        visitor_card_id: visitor.visitor_card_id,
-        Name: name,
+        id: visitor.Visitor_id,
         is_admin: false,
       });
 
@@ -84,7 +82,10 @@ export default class AuthController {
   }
 
   getToken(key, user) {
-    return jwt.sign({ is_admin: user.is_admin.toString() }, key);
+    return jwt.sign(
+      { is_admin: user.is_admin.toString(), id: user.id.toString() },
+      key
+    );
   }
 
   authenticateJWT(req, res, next) {

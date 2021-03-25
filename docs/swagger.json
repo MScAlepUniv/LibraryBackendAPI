@@ -32,6 +32,7 @@
                 "security": [],
                 "summary": "",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -96,7 +97,10 @@
                         "description": "Ok"
                     },
                     "409": {
-                        "description": "Visitor existe"
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 },
                 "tags": [
@@ -109,6 +113,7 @@
                 "security": [],
                 "summary": "",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -132,7 +137,10 @@
                         "description": "Ok"
                     },
                     "404": {
-                        "description": "Visitor not found"
+                        "description": "Visitor or employee not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 },
                 "tags": [
@@ -144,6 +152,7 @@
             "post": {
                 "summary": "",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -214,8 +223,258 @@
                     "200": {
                         "description": "Ok"
                     },
-                    "404": {
-                        "description": "Visitor not found"
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createAuther": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "last_name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "basheer"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "shahrour"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "example": "1997/2/13"
+                                    },
+                                    "place_of_birth": {
+                                        "type": "string",
+                                        "example": "aleppo"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "aleppo"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "example": "1997/2/13"
+                                    },
+                                    "biography": {
+                                        "type": "string",
+                                        "example": "test"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createPublisher": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "basheer"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "aleppo"
+                                    },
+                                    "specialty": {
+                                        "type": "string",
+                                        "example": "test"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createClass": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "class_name": {
+                                        "type": "string",
+                                        "example": "class"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createSubject": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "subject_descript": {
+                                        "type": "string",
+                                        "example": "subject descript"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createPublication": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "title",
+                                    "author_id",
+                                    "rate_of_associating"
+                                ],
+                                "properties": {
+                                    "ISBN": {
+                                        "type": "integer",
+                                        "example": 4545
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "book title"
+                                    },
+                                    "date_of_publishing": {
+                                        "type": "string",
+                                        "example": "2005/2/13"
+                                    },
+                                    "publisher_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "class_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "keywords": {
+                                        "type": "string",
+                                        "example": "art sport"
+                                    },
+                                    "num_of_pages": {
+                                        "type": "integer",
+                                        "example": 201
+                                    },
+                                    "subject_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "purchase_price_copy": {
+                                        "type": "integer",
+                                        "example": 500
+                                    },
+                                    "for_sale": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "sale_price_copy": {
+                                        "type": "integer",
+                                        "example": 900
+                                    },
+                                    "author_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "rate_of_associating": {
+                                        "type": "integer",
+                                        "example": 45
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 },
                 "tags": [
