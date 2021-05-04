@@ -235,7 +235,7 @@
                 ]
             }
         },
-        "/mysql/admin/createAuther": {
+        "/mysql/admin/createAuthor": {
             "post": {
                 "summary": "",
                 "requestBody": {
@@ -268,7 +268,7 @@
                                         "type": "string",
                                         "example": "aleppo"
                                     },
-                                    "date_of_birth": {
+                                    "date_of_death": {
                                         "type": "string",
                                         "example": "1997/2/13"
                                     },
@@ -376,7 +376,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "subject_descript": {
+                                    "subject_description": {
                                         "type": "string",
                                         "example": "subject descript"
                                     }
@@ -444,7 +444,7 @@
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "purchase_price_copy": {
+                                    "pirchase_price_copy": {
                                         "type": "integer",
                                         "example": 500
                                     },

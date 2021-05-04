@@ -8,246 +8,246 @@ datasource db {
 }
 
 model author_publication {
-  Author_id           Int
-  Published_id        Int
-  Rate_of_associating Int
-  authors             authors      @relation(fields: [Author_id], references: [Author_id])
-  publications        publications @relation(fields: [Published_id], references: [Publication_id])
+  author_id           Int
+  published_id        Int
+  rate_of_associating Int
+  authors             authors      @relation(fields: [author_id], references: [id])
+  publications        publications @relation(fields: [published_id], references: [id])
 
-  @@id([Author_id, Published_id])
-  @@index([Author_id], name: "Author_id")
-  @@index([Published_id], name: "Published_id")
+  @@id([author_id, published_id])
+  @@index([author_id], name: "Author_id")
+  @@index([published_id], name: "Published_id")
 }
 
 model authors {
-  Author_id          Int                  @id @default(autoincrement())
-  Name               String               @db.VarChar(50)
-  Last_name          String               @db.VarChar(50)
-  Birthday           DateTime?            @db.Date
-  Place_of_Birth     String?              @db.VarChar(50)
-  Address            String?              @db.VarChar(100)
-  date_of_birth      DateTime?            @db.Date
-  Biography          String?              @db.VarChar(300)
+  id                 Int                  @id @default(autoincrement()) @map("_id")
+  name               String               @db.VarChar(50)
+  last_name          String               @db.VarChar(50)
+  birthday           DateTime?            @db.Date
+  place_of_birth     String?              @db.VarChar(50)
+  address            String?              @db.VarChar(100)
+  date_of_death      DateTime?            @db.Date
+  biography          String?              @db.VarChar(300)
   author_publication author_publication[]
 }
 
 model availabilities {
-  Availability_id    Int                  @id @default(autoincrement())
-  Availability_type  String               @db.VarChar(50)
-  ownershiptransfers ownershiptransfers[]
-}
-
-model borrowingrecords {
-  Borrow_id          Int       @id @default(autoincrement())
-  Visitor_id         Int
-  Employee_id        Int
-  Copy_id            Int
-  date_Borrow        DateTime  @db.Date
-  type_Borrow        String    @db.VarChar(50)
-  date_return        DateTime  @db.Date
-  date_actual_return DateTime  @db.Date
-  copies             copies    @relation(fields: [Copy_id], references: [Copy_id])
-  employees          employees @relation(fields: [Employee_id], references: [Employee_id])
-
-  @@index([Copy_id], name: "Copy_id")
-  @@index([Employee_id], name: "Employee_id")
+  id                  Int                   @id @default(autoincrement()) @map("_id")
+  availability_type   String                @db.VarChar(50)
+  ownership_transfers ownership_transfers[]
 }
 
 model classes {
-  Class_id       Int              @id @default(autoincrement())
-  Class_name     String           @db.VarChar(50)
+  id             Int              @id @default(autoincrement()) @map("_id")
+  class_name     String           @db.VarChar(50)
   discountoffers discountoffers[]
   publications   publications[]
 }
 
 model copies {
-  Copy_id            Int                  @id @default(autoincrement())
-  Published_id       Int
-  State_id           Int
-  current_situation  String               @db.VarChar(50)
-  publications       publications         @relation(fields: [Published_id], references: [Publication_id])
-  states             states               @relation(fields: [State_id], references: [State_id])
-  borrowingrecords   borrowingrecords[]
-  ownershiptransfers ownershiptransfers[]
+  copy_id             Int                   @id @default(autoincrement())
+  publication_id      Int
+  state_id            Int
+  current_situation   String                @db.VarChar(50)
+  publications        publications          @relation(fields: [publication_id], references: [id])
+  states              states                @relation(fields: [state_id], references: [id])
+  borrows             borrows[]
+  ownership_transfers ownership_transfers[]
 
-  @@index([Published_id], name: "Published_id")
-  @@index([State_id], name: "State_id")
-}
-
-model customeraccounts {
-  Account_Id    Int        @id @default(autoincrement())
-  BankName      String     @db.VarChar(50)
-  Address       String     @db.VarChar(100)
-  BankAccountNo String     @db.VarChar(100)
-  visitor_Id    Int
-  vsitors       vsitors    @relation(fields: [visitor_Id], references: [Visitor_id])
-  invoices      invoices[]
-
-  @@index([visitor_Id], name: "visitor_Id")
+  @@index([publication_id], name: "Published_id")
+  @@index([state_id], name: "State_id")
 }
 
 model discountoffers {
-  Offer_id         Int          @id @default(autoincrement())
+  id               Int          @id @default(autoincrement()) @map("_id")
   rate_of_discount Int
-  Quantity         Int
+  quantity         Int
   class_id         Int
-  Publisher_id     Int
-  publications     publications @relation(fields: [Publisher_id], references: [Publication_id])
-  classes          classes      @relation(fields: [class_id], references: [Class_id])
+  publisher_id     Int
+  classes          classes      @relation(fields: [class_id], references: [id])
+  publications     publications @relation(fields: [publisher_id], references: [id])
 
-  @@index([Publisher_id], name: "Publisher_id")
+  @@index([publisher_id], name: "Publisher_id")
   @@index([class_id], name: "class_id")
 }
 
 model employees {
-  Employee_id                    Int                @id @default(autoincrement())
-  Name                           String             @db.VarChar(50)
-  Father_name                    String             @db.VarChar(50)
-  Last_name                      String             @db.VarChar(50)
-  Birthday                       DateTime           @db.Date
-  Address                        String             @db.VarChar(100)
-  Qualification                  String             @db.VarChar(100)
-  Job                            String             @db.VarChar(50)
-  date_of_start                  DateTime           @db.Date
-  date_of_end                    DateTime           @db.Date
-  sale_permission                Boolean            @db.Bit(1)
-  borrowing_permission           Boolean?           @db.Bit(1)
-  permission_granted_permissions Boolean            @db.Bit(1)
-  user_name                      String             @db.VarChar(50)
-  pass                           String             @db.VarChar(20)
-  is_admin                       Boolean            @default(dbgenerated("b'0'")) @db.Bit(1)
-  borrowingrecords               borrowingrecords[]
-  requests                       requests[]         @ignore
+  id                             Int        @id @default(autoincrement()) @map("_id")
+  name                           String     @db.VarChar(50)
+  father_name                    String     @db.VarChar(50)
+  last_name                      String     @db.VarChar(50)
+  birthday                       DateTime   @db.Date
+  address                        String     @db.VarChar(100)
+  qualification                  String     @db.VarChar(100)
+  job                            String     @db.VarChar(50)
+  date_of_start                  DateTime   @db.Date
+  date_of_end                    DateTime   @db.Date
+  sale_permission                Boolean    @db.Bit(1)
+  borrowing_permission           Boolean?   @db.Bit(1)
+  permission_granted_permissions Boolean    @db.Bit(1)
+  user_name                      String     @db.VarChar(50)
+  pass                           String     @db.VarChar(20)
+  is_admin                       Boolean    @default(dbgenerated("b'0'")) @db.Bit(1)
+  borrows                        borrows[]
+  requests                       requests[] @ignore
 }
 
 model invoices {
-  Invoice_Id         Int                  @id @default(autoincrement())
-  Price              Float
-  CustomerAccount_Id Int
-  TotalDiscount      Float
-  FinalPrice         Float
-  customeraccounts   customeraccounts     @relation(fields: [CustomerAccount_Id], references: [Account_Id])
-  ownershiptransfers ownershiptransfers[]
-  refunds            refunds[]
+  id                  Int                   @id @default(autoincrement()) @map("_id")
+  price               Float
+  customer_account_id Int
+  total_discount      Float
+  final_price         Float
+  customer_accounts   customer_accounts     @relation(fields: [customer_account_id], references: [Id])
+  ownership_transfers ownership_transfers[]
+  refunds             refunds[]
 
-  @@index([CustomerAccount_Id], name: "CustomerAccount_Id")
-}
-
-model ownershiptransfers {
-  id                                                 Int            @id @default(autoincrement())
-  copy_id                                            Int
-  data                                               DateTime       @db.Date
-  Availability_id                                    Int
-  beneficiary                                        String?        @db.VarChar(50)
-  TransferType                                       String         @db.VarChar(50)
-  Invoice_id                                         Int
-  Refund_Id                                          Int
-  availabilities                                     availabilities @relation(fields: [Availability_id], references: [Availability_id])
-  invoices                                           invoices       @relation(fields: [Invoice_id], references: [Invoice_Id])
-  refunds_ownershiptransfers_Refund_IdTorefunds      refunds        @relation("ownershiptransfers_Refund_IdTorefunds", fields: [Refund_Id], references: [Refund_Id])
-  copies                                             copies         @relation(fields: [copy_id], references: [Copy_id])
-  refunds_ownershiptransfersTorefunds_OldTransfer_Id refunds[]      @relation("ownershiptransfersTorefunds_OldTransfer_Id")
-
-  @@index([Availability_id], name: "Availability_id")
-  @@index([Invoice_id], name: "Invoice_id")
-  @@index([Refund_Id], name: "Refund_Id")
-  @@index([TransferType], name: "TransferType_Id")
-  @@index([copy_id], name: "copy_id")
+  @@index([customer_account_id], name: "CustomerAccount_Id")
 }
 
 model publications {
-  Publication_id      Int                  @id @default(autoincrement())
+  id                  Int                  @id @default(autoincrement()) @map("_id")
   ISBN                Int?
-  Tittel              String               @db.VarChar(50)
-  date_of_Publishing  DateTime?            @db.Date
+  title               String               @db.VarChar(50)
+  date_of_publishing  DateTime?            @db.Date
   publisher_id        Int?
-  Class_id            Int?
-  Keywords            String?              @db.VarChar(100)
+  class_id            Int?
+  keywords            String?              @db.VarChar(100)
   num_of_pages        Int?
   subject_id          Int?
-  purchase_price_copy Int?
+  pirchase_price_copy Int?
   for_sale            Bytes?               @db.Bit(5)
   sale_price_copy     Int?
-  classes             classes?             @relation(fields: [Class_id], references: [Class_id])
-  publishers          publishers?          @relation(fields: [publisher_id], references: [Publisher_id])
-  subjects            subjects?            @relation(fields: [subject_id], references: [Subject_id])
+  classes             classes?             @relation(fields: [class_id], references: [id])
+  publishers          publishers?          @relation(fields: [publisher_id], references: [id])
+  subjects            subjects?            @relation(fields: [subject_id], references: [id])
   author_publication  author_publication[]
   copies              copies[]
   discountoffers      discountoffers[]
 
-  @@index([Class_id], name: "Class_id")
+  @@index([class_id], name: "Class_id")
   @@index([publisher_id], name: "publisher_id")
   @@index([subject_id], name: "subject_id")
 }
 
 model publishers {
-  Publisher_id Int            @id @default(autoincrement())
-  Name         String         @db.VarChar(50)
-  Address      String         @db.VarChar(100)
+  id           Int            @id @default(autoincrement()) @map("_id")
+  name         String         @db.VarChar(50)
+  address      String         @db.VarChar(100)
   specialty    String         @db.VarChar(50)
   publications publications[]
 }
 
 model refunds {
-  Refund_Id                                                     Int                  @id @default(autoincrement())
-  Price                                                         Float
-  OldTransfer_Id                                                Int
-  Invoice_Id                                                    Int
-  invoices                                                      invoices             @relation(fields: [Invoice_Id], references: [Invoice_Id])
-  ownershiptransfers_ownershiptransfersTorefunds_OldTransfer_Id ownershiptransfers   @relation("ownershiptransfersTorefunds_OldTransfer_Id", fields: [OldTransfer_Id], references: [id])
-  ownershiptransfers_ownershiptransfers_Refund_IdTorefunds      ownershiptransfers[] @relation("ownershiptransfers_Refund_IdTorefunds")
+  id                                                               Int                   @id @default(autoincrement()) @map("_id")
+  price                                                            Float
+  old_transfer_id                                                  Int
+  invoice_id                                                       Int
+  invoices                                                         invoices              @relation(fields: [invoice_id], references: [id])
+  ownership_transfers_ownership_transfersTorefunds_old_transfer_id ownership_transfers   @relation("ownership_transfersTorefunds_old_transfer_id", fields: [old_transfer_id], references: [id])
+  ownership_transfers_ownership_transfers_refund_idTorefunds       ownership_transfers[] @relation("ownership_transfers_refund_idTorefunds")
 
-  @@index([Invoice_Id], name: "Invoice_Id")
-  @@index([OldTransfer_Id], name: "OldTransfer_Id")
+  @@index([invoice_id], name: "Invoice_Id")
+  @@index([old_transfer_id], name: "OldTransfer_Id")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model requests {
-  Request_Id         Int
-  Employee_Id        Int
-  PublicationName    String    @db.VarChar(100)
-  NotAvailableReason String    @db.VarChar(100)
-  Date               DateTime  @db.Date
-  employees          employees @relation(fields: [Employee_Id], references: [Employee_id])
+  id                   Int       @id @default(autoincrement()) @map("_id")
+  employee_id          Int
+  publication_name     String    @db.VarChar(100)
+  not_available_reason String    @db.VarChar(100)
+  date                 DateTime  @db.Date
+  employees            employees @relation(fields: [employee_id], references: [id])
 
-  @@index([Employee_Id], name: "Employee_Id")
+  @@index([employee_id], name: "Employee_Id")
   @@ignore
 }
 
 model states {
-  State_id   Int      @id @default(autoincrement())
-  State_type String   @db.VarChar(50)
+  id         Int      @id @default(autoincrement()) @map("_id")
+  state_type String   @db.VarChar(50)
   copies     copies[]
 }
 
 model subjects {
-  Subject_id       Int            @id @default(autoincrement())
-  Subject_descript String         @db.VarChar(100)
-  publications     publications[]
+  id                  Int            @id @default(autoincrement()) @map("_id")
+  subject_description String         @db.VarChar(100)
+  publications        publications[]
 }
 
 model subscriptioncards {
-  Card_id         Int       @id @default(autoincrement())
-  Subscription_id Int
-  State           String    @db.VarChar(50)
-  vsitors         vsitors[]
+  id              Int        @id @default(autoincrement()) @map("_id")
+  subscription_id Int
+  state           String     @db.VarChar(50)
+  visitors        visitors[]
 }
 
-model vsitors {
-  Visitor_id        Int                @id @default(autoincrement())
-  Name              String             @db.VarChar(50)
-  Father_name       String             @db.VarChar(50)
-  Last_name         String             @db.VarChar(50)
-  Birthdate         DateTime           @db.Date
+model borrows {
+  id                 Int       @id @default(autoincrement()) @map("_id")
+  visitor_id         Int
+  employee_id        Int
+  copy_id            Int
+  date_borrow        DateTime  @db.Date
+  type_borrow        String    @db.VarChar(50)
+  date_return        DateTime  @db.Date
+  date_actual_return DateTime  @db.Date
+  copies             copies    @relation(fields: [copy_id], references: [copy_id])
+  employees          employees @relation(fields: [employee_id], references: [id])
+
+  @@index([copy_id], name: "Copy_id")
+  @@index([employee_id], name: "Employee_id")
+}
+
+model customer_accounts {
+  Id              Int        @id @default(autoincrement()) @map("_Id")
+  bank_name       String     @db.VarChar(50)
+  address         String     @db.VarChar(100)
+  bank_account_no String     @db.VarChar(100)
+  visitor_id      Int
+  visitors        visitors   @relation(fields: [visitor_id], references: [id])
+  invoices        invoices[]
+
+  @@index([visitor_id], name: "visitor_Id")
+}
+
+model ownership_transfers {
+  id                                                   Int            @id @default(autoincrement()) @map("_id")
+  copy_id                                              Int
+  data                                                 DateTime       @db.Date
+  availability_type_id                                 Int
+  beneficiary                                          String?        @db.VarChar(50)
+  transfer_type                                        String         @db.VarChar(50)
+  invoice_id                                           Int
+  refund_id                                            Int
+  availabilities                                       availabilities @relation(fields: [availability_type_id], references: [id])
+  copies                                               copies         @relation(fields: [copy_id], references: [copy_id])
+  invoices                                             invoices       @relation(fields: [invoice_id], references: [id])
+  refunds_ownership_transfers_refund_idTorefunds       refunds        @relation("ownership_transfers_refund_idTorefunds", fields: [refund_id], references: [id])
+  refunds_ownership_transfersTorefunds_old_transfer_id refunds[]      @relation("ownership_transfersTorefunds_old_transfer_id")
+
+  @@index([availability_type_id], name: "Availability_id")
+  @@index([invoice_id], name: "Invoice_id")
+  @@index([refund_id], name: "Refund_Id")
+  @@index([transfer_type], name: "TransferType_Id")
+  @@index([copy_id], name: "copy_id")
+}
+
+model visitors {
+  id                Int                 @id @default(autoincrement()) @map("_id")
+  name              String              @db.VarChar(50)
+  father_name       String              @db.VarChar(50)
+  last_name         String              @db.VarChar(50)
+  birthday          DateTime            @db.Date
   visitor_card_id   Int
-  Address           String             @db.VarChar(100)
-  Job               String             @db.VarChar(50)
-  Subscription_date DateTime           @db.Date
-  Qualification     String             @db.VarChar(100)
-  user_name         String?            @db.VarChar(50)
-  pass              String?            @db.VarChar(20)
-  subscriptioncards subscriptioncards  @relation(fields: [visitor_card_id], references: [Card_id])
-  customeraccounts  customeraccounts[]
+  address           String              @db.VarChar(100)
+  job               String              @db.VarChar(50)
+  subscription_date DateTime            @db.Date
+  qualification     String              @db.VarChar(100)
+  user_name         String?             @db.VarChar(50)
+  pass              String?             @db.VarChar(20)
+  subscriptioncards subscriptioncards   @relation(fields: [visitor_card_id], references: [id])
+  customer_accounts customer_accounts[]
 
   @@index([visitor_card_id], name: "visitor_card_id")
 }

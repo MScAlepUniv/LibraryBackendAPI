@@ -11,7 +11,7 @@ import swaggerDocument from "./docs/swagger.json";
 import mysqlAuthRouter from "./routers/mysql/auth.js";
 import mysqlAdminRouter from "./routers/mysql/admin.js";
 
-import AuthController from "./mysql/controllers/AuthController.js";
+import AuthController from "./controllers/auth.controller.js";
 
 // mongoose
 //   .connect(process.env.MONGODB_CONNECTION_STRING, {

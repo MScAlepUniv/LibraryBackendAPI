@@ -1,31 +1,27 @@
-import prisma from "../prisma/prismaClientObject.js";
 import jwt from "jsonwebtoken";
+import AuthService from "../services/auth.service.js";
+import VisitorService from "../services/visitor.service.js";
 
 export default class AuthController {
-  constructor() {}
+  constructor() {
+    this.authService = new AuthService();
+    this.visitorService = new VisitorService();
+  }
 
   async login(req, res) {
     const { user_name, pass } = req.body;
     try {
-      let isAdmin = false;
-      let user = await prisma.vsitors.findFirst({
-        where: { user_name, pass },
+      let user = await this.authService.verifyUser({
+        user_name,
+        pass,
       });
-      if (!user) {
-        user = await prisma.employees.findFirst({
-          where: { user_name, pass },
-        });
-        if (!user) return res.sendStatus(404);
-        isAdmin = user.is_admin;
-      }
-      console.log(user.is_admin);
+      if (user === null) return res.sendStatus(404);
       const accToken = this.getToken(process.env.JWT_KEY, {
-        id: user.Visitor_id ? user.Visitor_id : user.Employee_id,
-        is_admin: isAdmin,
+        id: user.id,
+        is_admin: user.is_admin ? true : false,
       });
       delete user.pass;
       delete user.is_admin;
-
       res.send({ ...user, acc_token: accToken });
     } catch (error) {
       console.log(error);
@@ -34,43 +30,18 @@ export default class AuthController {
   }
 
   async register(req, res) {
-    const {
-      name,
-      father_name,
-      last_name,
-      birthdate,
-      address,
-      job,
-      qualification,
-      user_name,
-      pass,
-      subscriptioncard_info: { subscription_id, state },
-    } = req.body;
     try {
-      let visitor = await prisma.vsitors.findFirst({ where: { user_name } });
+      let visitor = await this.visitorService.getVisitorByName(
+        req.body.user_name
+      );
       if (visitor) return res.sendStatus(409);
 
-      visitor = await prisma.vsitors.create({
-        data: {
-          Name: name,
-          Father_name: father_name,
-          Last_name: last_name,
-          Birthdate: new Date(birthdate),
-          Address: address,
-          Job: job,
-          Subscription_date: new Date(),
-          Qualification: qualification,
-          user_name,
-          pass,
-          subscriptioncards: {
-            create: { Subscription_id: subscription_id, State: state },
-          },
-        },
-      });
+      visitor = await this.visitorService.createVisitor(req.body);
       delete visitor.pass;
+      delete visitor.is_admin;
 
       const accToken = this.getToken(process.env.JWT_KEY, {
-        id: visitor.Visitor_id,
+        id: visitor.id,
         is_admin: false,
       });
 
