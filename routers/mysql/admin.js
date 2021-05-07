@@ -31,6 +31,11 @@ router.delete("/deleteClass/:id", (req, res) =>
   classController.deleteClass(req, res)
 );
 
+router.put("/updateClass/:id", (req, res) =>
+  classController.updateClass(req, res)
+);
+
+
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
 );

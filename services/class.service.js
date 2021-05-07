@@ -9,8 +9,17 @@ export default class ClassService {
   async deleteClass(id){
     return await prisma.classes.delete({
       where: {
-        id:id,
+        id:parseInt(id)
       }
+    });
+  }
+
+  async updateClass(aClassToUpdate, id){
+    return await prisma.classes.update({
+      where: {
+        id: parseInt(id)
+      },
+      data: { ...aClassToUpdate }
     });
   }
 }

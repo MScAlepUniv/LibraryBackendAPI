@@ -366,6 +366,45 @@
                 ]
             }
         },
+        "/mysql/admin/updateClass/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "class_name": {
+                                        "type": "string",
+                                        "example": "class"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Class id to update",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/deleteClass/{id}": {
             "delete": {
                 "summary": "Delete a class by its id",
