@@ -22,4 +22,10 @@ export default class ClassService {
       data: { ...aClassToUpdate }
     });
   }
+
+  async getAllClasses(){
+    return await prisma.classes.findMany({});
+  }
+
+
 }

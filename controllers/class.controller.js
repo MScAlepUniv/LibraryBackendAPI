@@ -35,4 +35,17 @@ export default class ClassController {
       res.sendStatus(500);
     }
   }
+
+  async getAllClasses(req, res){
+    try{
+      const allClasses = await this.classService.getAllClasses();
+      res.send(allClasses);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
+
+
 }

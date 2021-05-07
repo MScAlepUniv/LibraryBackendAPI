@@ -35,7 +35,11 @@ router.put("/updateClass/:id", (req, res) =>
   classController.updateClass(req, res)
 );
 
+router.get("/getAllClasses", (req, res) =>
+  classController.getAllClasses(req, res)
+);
 
+//////////////////////////////////////////////
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
 );

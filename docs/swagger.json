@@ -405,6 +405,23 @@
                 ]
             }
         },
+        "/mysql/admin/getAllClasses": {
+            "get": {
+                "summary": "Get all classes",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/deleteClass/{id}": {
             "delete": {
                 "summary": "Delete a class by its id",
