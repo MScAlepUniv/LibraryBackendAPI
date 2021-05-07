@@ -14,4 +14,14 @@ export default class ClassController {
       res.sendStatus(500);
     }
   }
+
+  async deleteClass(req, res) {
+    try{
+      await this.classService.deleteClass(req.params.id);
+      res.json({ message: 'Deleted' });
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
 }

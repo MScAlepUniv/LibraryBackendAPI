@@ -366,6 +366,37 @@
                 ]
             }
         },
+        "/mysql/admin/deleteClass/{id}": {
+            "delete": {
+                "summary": "Delete a class by its id",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/createSubject": {
             "post": {
                 "summary": "",

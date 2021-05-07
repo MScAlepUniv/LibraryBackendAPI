@@ -5,4 +5,12 @@ export default class ClassService {
   async createClass(aClass) {
     return await prisma.classes.create({ data: { ...aClass } });
   }
+
+  async deleteClass(id){
+    return await prisma.classes.delete({
+      where: {
+        id:id,
+      }
+    });
+  }
 }

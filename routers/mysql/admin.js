@@ -26,6 +26,10 @@ router.post("/createAuthor", (req, res) =>
 router.post("/createClass", (req, res) =>
   classController.createClass(req, res)
 );
+//////////////////////////////////////////////
+router.delete("/deleteClass/:id", (req, res) =>
+  classController.deleteClass(req, res)
+);
 
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
