@@ -334,6 +334,96 @@
                 ]
             }
         },
+        "/mysql/admin/getAllPublishers": {
+            "get": {
+                "summary": "Get all publishers",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/updatePublisher/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "publisher"
+                                    },
+                                    "address":{
+                                        "type": "string",
+                                        "example": "adress"
+                                    },
+                                    "specialty":{
+                                        "type": "string",
+                                        "example": "specialty"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Publisher id to update",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deletePublisher/{id}": {
+            "delete": {
+                "summary": "Delete a publisher by its id",
+                "description": "",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Publisher id to delete",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+
         "/mysql/admin/createClass": {
             "post": {
                 "summary": "",

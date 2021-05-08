@@ -19,7 +19,7 @@ export default class ClassController {
     try{
       // console.log(req.params.id);
       const deletedClass = await this.classService.deleteClass(req.params.id);
-      res.send("The class ("+deletedClass["class_name"]+") was Deleted");
+      res.send("The class ("+deletedClass["class_name"]+") has been Deleted succesfully");
     } catch (error){
       console.log(error);
       res.sendStatus(500);

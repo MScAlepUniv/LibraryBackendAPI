@@ -39,6 +39,17 @@ router.get("/getAllClasses", (req, res) =>
   classController.getAllClasses(req, res)
 );
 
+router.get("/getAllPublishers", (req, res) =>
+  publisherController.getAllPublishers(req, res)
+);
+
+router.put("/updatePublisher/:id", (req, res) =>
+  publisherController.updatePublisher(req, res)
+);
+
+router.delete("/deletePublisher/:id", (req, res) =>
+  publisherController.deletePublisher(req, res)
+);
 //////////////////////////////////////////////
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
