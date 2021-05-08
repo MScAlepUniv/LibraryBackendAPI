@@ -5,15 +5,17 @@ import ClassController from "../../controllers/class.controller.js";
 import PublicationController from "../../controllers/publication.controller.js";
 import PublisherController from "../../controllers/publisher.controller.js";
 import SubjectController from "../../controllers/subject.controller.js";
+import StateController from "../../controllers/state.controller.js";
 
 const router = express.Router();
 
-const employeeController = new EmployeeController();
-const authorController = new AuthorController();
-const classController = new ClassController();
+const employeeController    = new EmployeeController();
+const authorController      = new AuthorController();
+const classController       = new ClassController();
 const publicationController = new PublicationController();
-const publisherController = new PublisherController();
-const subjectController = new SubjectController();
+const publisherController   = new PublisherController();
+const subjectController     = new SubjectController();
+const stateController       = new StateController();
 
 router.post("/createEmployee", (req, res) =>
   employeeController.createEmployee(req, res)
@@ -76,4 +78,21 @@ router.delete("/deletePublisher/:id", (req, res) =>
 router.post("/createSubject", (req, res) =>
   subjectController.createSubject(req, res)
 );
+///////////////////////////////////////////////////
+router.post("/createState", (req, res) =>
+  stateController.createState(req, res)
+);
+
+router.get("/getAllStates", (req, res) =>
+  stateController.getAllStates(req, res)
+);
+
+router.put("/updateStae/:id", (req, res) =>
+  stateController.updateState(req, res)
+);
+
+router.delete("/deleteState/:id", (req, res) => 
+  stateController.deleteState(req, res)
+);
+///////////////////////////////////////////////////
 export default router;

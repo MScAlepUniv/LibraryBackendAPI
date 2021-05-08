@@ -675,6 +675,120 @@
                 ]
             }
         },
+
+        "/mysql/admin/createState": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "state_type": {
+                                        "type": "string",
+                                        "example": "type"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/getAllStates": {
+            "get": {
+                "summary": "Get all states",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/updateStae/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "state_type": {
+                                        "type": "string",
+                                        "example": "damaged"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "State id to update",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deleteState/{id}": {
+            "delete": {
+                "summary": "Delete a state by its id",
+                "description": "",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "State id to delete",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/createPublication": {
             "post": {
                 "summary": "",

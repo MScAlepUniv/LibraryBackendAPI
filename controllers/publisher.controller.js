@@ -4,6 +4,7 @@ export default class AdminController {
   constructor() {
     this.publisherService = new PublisherService();
   }
+  
   async createPublisher(req, res) {
     try {
       const publisher = await this.publisherService.createPublisher(req.body);
