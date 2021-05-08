@@ -294,6 +294,112 @@
                 ]
             }
         },
+        "/mysql/admin/getAllAuthors": {
+            "get": {
+                "summary": "Get all authors",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/updateAuthor/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "rezan"
+                                    },
+                                    "last_name":{
+                                        "type": "string",
+                                        "example": "hussein"
+                                    },
+                                    "birthday":{
+                                        "type": "string",
+                                        "example": "1993/4/16"
+                                    },
+                                    "place_of_birth":{
+                                        "type": "string",
+                                        "example": "aleppo"
+                                    },
+                                    "address":{
+                                        "type": "string",
+                                        "example": "aleppo"
+                                    },
+                                    "date_of_death":{
+                                        "type": "string",
+                                        "example": "1993/4/16"
+                                    },
+                                    "biography": {
+                                        "type": "string",
+                                        "example": "test"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Author id to update",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deleteAuthor/{id}": {
+            "delete": {
+                "summary": "Delete an Author by its id",
+                "description": "",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Author id to delete",
+                    "required": true,
+                    "schema":{"type": "integer"}
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+
         "/mysql/admin/createPublisher": {
             "post": {
                 "summary": "",
