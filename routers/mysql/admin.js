@@ -50,6 +50,11 @@ router.put("/updateClass/:id", (req, res) =>
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
 );
+
+// router.delete("/deletePublication/:id", (req, res) => 
+//   publicationController.deletePublication(req, res)
+// );
+
 ///////////////////////////////////////////////////
 router.post("/createPublisher", (req, res) =>
   publisherController.createPublisher(req, res)

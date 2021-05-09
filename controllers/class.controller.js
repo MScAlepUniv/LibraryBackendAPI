@@ -46,6 +46,15 @@ export default class ClassController {
     }
   }
 
-
+  async getClass(req, res){
+    try{
+      const aClass = await this.classService.getClass(req.params.id);
+      if (aClass === null) return res.sendStatus(404);
+      res.send(aClass);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
 
 }

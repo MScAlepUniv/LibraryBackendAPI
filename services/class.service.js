@@ -20,4 +20,13 @@ export default class ClassService {
   async getAllClasses() {
     return await prisma.classes.findMany();
   }
+
+  async getClass(id){
+    return await prisma.classes.findFirst({
+      where: {
+        id: parseInt(id)
+      }
+    });
+  }
+
 }

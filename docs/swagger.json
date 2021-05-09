@@ -311,6 +311,37 @@
                 ]
             }
         },
+        "/mysql/common/getAuthor/{id}": {
+            "get": {
+                "summary": "get an Author by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Auther not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/updateAuthor/{id}": {
             "put": {
                 "summary": "",
@@ -453,6 +484,37 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getPublisher/{id}": {
+            "get": {
+                "summary": "get a Publisher by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Publisher not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -634,6 +696,37 @@
                 ]
             }
         },
+        "/mysql/common/getClass/{id}": {
+            "get": {
+                "summary": "get a Class by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Class id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Class not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/deleteClass/{id}": {
             "delete": {
                 "summary": "Delete a class by its id",
@@ -782,6 +875,37 @@
                 ]
             }
         },
+        "/mysql/common/getSubject/{id}": {
+            "get": {
+                "summary": "get a Subject by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subject id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Subject not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/createState": {
             "post": {
                 "summary": "",
@@ -821,6 +945,37 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getState/{id}": {
+            "get": {
+                "summary": "get a State by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "State id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "State not found"
                     },
                     "500": {
                         "description": "Internal Server Error"

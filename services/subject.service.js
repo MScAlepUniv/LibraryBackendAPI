@@ -13,6 +13,14 @@ export default class SubjectService {
     return await prisma.subjects.findMany({});
   }
 
+  async getSubject(id){
+    return await prisma.subjects.findFirst({
+      where:{
+        id: parseInt(id)
+      }
+    });
+  }
+
   async updateSubject(data, id){
     return await prisma.subjects.update({
       where: { id: parseInt(id) },

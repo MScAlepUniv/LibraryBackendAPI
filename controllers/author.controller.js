@@ -25,6 +25,18 @@ export default class AuthorController {
     }
   }
 
+  async getAuthor(req, res){
+    try{
+      const author = await this.authorService.getAuthor(req.params.id);
+      if (author === null) return res.sendStatus(404);
+      res.send(author);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+  
+
   async deleteAuthor(req, res){
     try{
       const deletedAuthor = await this.authorService.deleteAuthor(req.params.id);

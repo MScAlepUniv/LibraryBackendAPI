@@ -25,6 +25,18 @@ export default class AdminController {
     }
   }
 
+  async getPublisher(req, res){
+    try{
+      const publisher = await this.publisherService.getPublisher(req.params.id);
+      if (publisher === null) return res.sendStatus(404);
+      res.send(publisher);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+  
+
   async updatePublisher(req, res){
     try{
       const updatedPublisher = await this.publisherService.updatePublisher(req.body, req.params.id);

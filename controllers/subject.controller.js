@@ -25,6 +25,17 @@ export default class ClassController {
     }
   }
 
+  async getSubject(req, res){
+    try{
+      const subject = await this.subjectService.getSubject(req.params.id);
+      if (subject === null) return res.sendStatus(404);
+      res.send(subject);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
   async updateSubject(req, res){
     try {
       // const subjectData = await this.subjectService.getSubject(req.params.id);

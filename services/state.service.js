@@ -11,6 +11,12 @@ export default class StateService {
     return await prisma.states.findMany();
   }
 
+  async getState(id){
+    return await prisma.states.findFirst({
+      where: { id: parseInt(id) },
+    });
+  }
+
   async updateState(state, id) {
     return await prisma.states.update({
       where: { id: parseInt(id) },

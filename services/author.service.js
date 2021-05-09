@@ -27,7 +27,15 @@ export default class AuthorService {
   }
 
   async getAllAuthors() {
-    return await prisma.authors.findMany();
+    return await prisma.authors.findMany({});
+  }
+
+  async getAuthor(id){
+    return await prisma.authors.findFirst({
+      where: {
+        id: parseInt(id)
+      }
+    });
   }
 
   async deleteAuthor(id) {
