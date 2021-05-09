@@ -32,3 +32,5 @@ router.get("/getAllPublishers", (req, res) =>
 router.get("/getAllStates", (req, res) =>
   stateController.getAllStates(req, res)
 );
+
+export default router;
