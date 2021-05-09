@@ -10,6 +10,7 @@ import swaggerDocument from "./docs/swagger.json";
 
 import mysqlAuthRouter from "./routers/mysql/auth.js";
 import mysqlAdminRouter from "./routers/mysql/admin.js";
+import mysqlCommonRouter from "./routers/mysql/common.js";
 
 import AuthController from "./controllers/auth.controller.js";
 
@@ -41,6 +42,7 @@ app.use(
   authController.adminChecker,
   mysqlAdminRouter
 );
+app.use("/mysql/common", authController.authenticateJWT, mysqlCommonRouter);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log("Server is running on port: " + port));

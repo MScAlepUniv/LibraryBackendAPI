@@ -25,10 +25,6 @@ router.post("/createAuthor", (req, res) =>
   authorController.createAuthor(req, res)
 );
 
-router.get("/getAllAuthors", (req, res) =>
-  authorController.getAllAuthors(req, res)
-);
-
 router.delete("/deleteAuthor/:id", (req, res) =>
   authorController.deleteAuthor(req, res)
 );
@@ -50,10 +46,6 @@ router.put("/updateClass/:id", (req, res) =>
   classController.updateClass(req, res)
 );
 
-router.get("/getAllClasses", (req, res) =>
-  classController.getAllClasses(req, res)
-);
-
 //////////////////////////////////////////////
 router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
@@ -63,10 +55,6 @@ router.post("/createPublisher", (req, res) =>
   publisherController.createPublisher(req, res)
 );
 
-router.get("/getAllPublishers", (req, res) =>
-  publisherController.getAllPublishers(req, res)
-);
-
 router.put("/updatePublisher/:id", (req, res) =>
   publisherController.updatePublisher(req, res)
 );
@@ -74,17 +62,15 @@ router.put("/updatePublisher/:id", (req, res) =>
 router.delete("/deletePublisher/:id", (req, res) =>
   publisherController.deletePublisher(req, res)
 );
+
 ///////////////////////////////////////////////////
 router.post("/createSubject", (req, res) =>
   subjectController.createSubject(req, res)
 );
+
 ///////////////////////////////////////////////////
 router.post("/createState", (req, res) =>
   stateController.createState(req, res)
-);
-
-router.get("/getAllStates", (req, res) =>
-  stateController.getAllStates(req, res)
 );
 
 router.put("/updateState/:id", (req, res) =>

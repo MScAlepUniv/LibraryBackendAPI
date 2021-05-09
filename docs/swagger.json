@@ -294,7 +294,7 @@
                 ]
             }
         },
-        "/mysql/admin/getAllAuthors": {
+        "/mysql/common/getAllAuthors": {
             "get": {
                 "summary": "Get all authors",
                 "description": "",
@@ -446,7 +446,7 @@
                 ]
             }
         },
-        "/mysql/admin/getAllPublishers": {
+        "/mysql/common/getAllPublishers": {
             "get": {
                 "summary": "Get all publishers",
                 "description": "",
@@ -617,7 +617,7 @@
                 ]
             }
         },
-        "/mysql/admin/getAllClasses": {
+        "/mysql/common/getAllClasses": {
             "get": {
                 "summary": "Get all classes",
                 "description": "",
@@ -726,7 +726,7 @@
                 ]
             }
         },
-        "/mysql/admin/getAllStates": {
+        "/mysql/common/getAllStates": {
             "get": {
                 "summary": "Get all states",
                 "description": "",
