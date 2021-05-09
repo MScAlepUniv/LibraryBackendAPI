@@ -8,4 +8,28 @@ export default class SubjectService {
       data: { ...subject },
     });
   }
+
+  async getAllSubjects(){
+    return await prisma.subjects.findMany({});
+  }
+
+  async updateSubject(data, id){
+    return await prisma.subjects.update({
+      where: { id: parseInt(id) },
+      data: { ...data },
+    });
+  }
+
+  async deleteSubject(id){
+    return await prisma.subjects.delete({
+      where: { id: parseInt(id) },
+    });
+  }
+
+  async getSubject(id){
+    return await prisma.subjects.findFirst({
+      where: { id: parseInt(id) },
+    });
+  }
+
 }

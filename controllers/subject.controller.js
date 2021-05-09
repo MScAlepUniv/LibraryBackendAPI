@@ -14,4 +14,37 @@ export default class ClassController {
       res.sendStatus(500);
     }
   }
+
+  async getAllSubjects(req, res){
+    try {
+      const allSubjects = await this.subjectService.getAllSubjects();
+      res.send(allSubjects);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
+  async updateSubject(req, res){
+    try {
+      // const subjectData = await this.subjectService.getSubject(req.params.id);
+      // res.send(subjectData);
+      const updatedSubject = await this.subjectService.updateSubject(req.body, req.params.id);
+      res.send(updatedSubject);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
+  async deleteSubject(req, res){
+    try {
+      await this.subjectService.deleteSubject(req.params.id);
+      res.send("The Subject has been Deleted succesfully");
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
 }

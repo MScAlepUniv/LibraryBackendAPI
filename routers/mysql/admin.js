@@ -68,6 +68,14 @@ router.post("/createSubject", (req, res) =>
   subjectController.createSubject(req, res)
 );
 
+router.put("/updateSubject/:id", (req, res) => 
+  subjectController.updateSubject(req, res)
+);
+
+router.delete("/deleteSubject/:id", (req, res) => 
+  subjectController.deleteSubject(req, res)
+);
+
 ///////////////////////////////////////////////////
 router.post("/createState", (req, res) =>
   stateController.createState(req, res)

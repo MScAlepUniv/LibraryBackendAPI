@@ -694,6 +694,94 @@
                 ]
             }
         },
+        "/mysql/admin/updateSubject/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "subject_description": {
+                                        "type": "string",
+                                        "example": "desc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subject id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deleteSubject/{id}": {
+            "delete": {
+                "summary": "Delete a Subject by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subject id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getAllSubjects": {
+            "get": {
+                "summary": "Get all subjects",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
         "/mysql/admin/createState": {
             "post": {
                 "summary": "",

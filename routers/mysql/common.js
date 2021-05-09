@@ -33,4 +33,9 @@ router.get("/getAllStates", (req, res) =>
   stateController.getAllStates(req, res)
 );
 
+router.get("/getAllSubjects", (req, res) => 
+  subjectController.getAllSubjects(req, res)
+);
+
+
 export default router;
