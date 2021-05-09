@@ -9,13 +9,13 @@ import StateController from "../../controllers/state.controller.js";
 
 const router = express.Router();
 
-const employeeController    = new EmployeeController();
-const authorController      = new AuthorController();
-const classController       = new ClassController();
+const employeeController = new EmployeeController();
+const authorController = new AuthorController();
+const classController = new ClassController();
 const publicationController = new PublicationController();
-const publisherController   = new PublisherController();
-const subjectController     = new SubjectController();
-const stateController       = new StateController();
+const publisherController = new PublisherController();
+const subjectController = new SubjectController();
+const stateController = new StateController();
 
 router.post("/createEmployee", (req, res) =>
   employeeController.createEmployee(req, res)
@@ -87,11 +87,11 @@ router.get("/getAllStates", (req, res) =>
   stateController.getAllStates(req, res)
 );
 
-router.put("/updateStae/:id", (req, res) =>
+router.put("/updateState/:id", (req, res) =>
   stateController.updateState(req, res)
 );
 
-router.delete("/deleteState/:id", (req, res) => 
+router.delete("/deleteState/:id", (req, res) =>
   stateController.deleteState(req, res)
 );
 ///////////////////////////////////////////////////

@@ -7,24 +7,18 @@ export default class AuthorService {
     return await prisma.publishers.create({ data: { ...publisher } });
   }
 
-  async getAllPublishers(){
+  async getAllPublishers() {
     return await prisma.publishers.findMany({});
   }
 
-  async updatePublisher(aPublisherToUpdate, id){
+  async updatePublisher(aPublisherToUpdate, id) {
     return await prisma.publishers.update({
-      where: {
-        id: parseInt(id)
-      },
-      data: { ...aPublisherToUpdate }
+      where: { id: parseInt(id) },
+      data: { ...aPublisherToUpdate },
     });
   }
 
-  async deletePublisher(id){
-    return await prisma.publishers.delete({
-      where: {
-        id:parseInt(id)
-      }
-    });
+  async deletePublisher(id) {
+    return await prisma.publishers.delete({ where: { id: parseInt(id) } });
   }
 }

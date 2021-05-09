@@ -50,7 +50,7 @@
                                         "type": "string",
                                         "example": "Shahrour"
                                     },
-                                    "birthdate": {
+                                    "birthday": {
                                         "type": "string",
                                         "example": "1997/2/13"
                                     },
@@ -325,23 +325,23 @@
                                         "type": "string",
                                         "example": "rezan"
                                     },
-                                    "last_name":{
+                                    "last_name": {
                                         "type": "string",
                                         "example": "hussein"
                                     },
-                                    "birthday":{
+                                    "birthday": {
                                         "type": "string",
                                         "example": "1993/4/16"
                                     },
-                                    "place_of_birth":{
+                                    "place_of_birth": {
                                         "type": "string",
                                         "example": "aleppo"
                                     },
-                                    "address":{
+                                    "address": {
                                         "type": "string",
                                         "example": "aleppo"
                                     },
-                                    "date_of_death":{
+                                    "date_of_death": {
                                         "type": "string",
                                         "example": "1993/4/16"
                                     },
@@ -354,13 +354,17 @@
                         }
                     }
                 },
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Author id to update",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok"
@@ -378,13 +382,16 @@
             "delete": {
                 "summary": "Delete an Author by its id",
                 "description": "",
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Author id to delete",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Author id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -399,7 +406,6 @@
                 ]
             }
         },
-
         "/mysql/admin/createPublisher": {
             "post": {
                 "summary": "",
@@ -471,11 +477,11 @@
                                         "type": "string",
                                         "example": "publisher"
                                     },
-                                    "address":{
+                                    "address": {
                                         "type": "string",
                                         "example": "adress"
                                     },
-                                    "specialty":{
+                                    "specialty": {
                                         "type": "string",
                                         "example": "specialty"
                                     }
@@ -484,13 +490,17 @@
                         }
                     }
                 },
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Publisher id to update",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok"
@@ -508,13 +518,16 @@
             "delete": {
                 "summary": "Delete a publisher by its id",
                 "description": "",
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Publisher id to delete",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -529,7 +542,6 @@
                 ]
             }
         },
-
         "/mysql/admin/createClass": {
             "post": {
                 "summary": "",
@@ -581,13 +593,17 @@
                         }
                     }
                 },
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Class id to update",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Class id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok"
@@ -622,13 +638,16 @@
             "delete": {
                 "summary": "Delete a class by its id",
                 "description": "",
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "Class id to delete",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Class id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -675,7 +694,6 @@
                 ]
             }
         },
-
         "/mysql/admin/createState": {
             "post": {
                 "summary": "",
@@ -725,7 +743,7 @@
                 ]
             }
         },
-        "/mysql/admin/updateStae/{id}": {
+        "/mysql/admin/updateState/{id}": {
             "put": {
                 "summary": "",
                 "requestBody": {
@@ -744,13 +762,17 @@
                         }
                     }
                 },
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "State id to update",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "State id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok"
@@ -768,13 +790,16 @@
             "delete": {
                 "summary": "Delete a state by its id",
                 "description": "",
-                "parameters": [{
-                    "name": "id",
-                    "in": "path",
-                    "description": "State id to delete",
-                    "required": true,
-                    "schema":{"type": "integer"}
-                }
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "State id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {

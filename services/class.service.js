@@ -6,26 +6,18 @@ export default class ClassService {
     return await prisma.classes.create({ data: { ...aClass } });
   }
 
-  async deleteClass(id){
-    return await prisma.classes.delete({
-      where: {
-        id:parseInt(id)
-      }
-    });
+  async deleteClass(id) {
+    return await prisma.classes.delete({ where: { id: parseInt(id) } });
   }
 
-  async updateClass(aClassToUpdate, id){
+  async updateClass(aClassToUpdate, id) {
     return await prisma.classes.update({
-      where: {
-        id: parseInt(id)
-      },
-      data: { ...aClassToUpdate }
+      where: { id: parseInt(id) },
+      data: { ...aClassToUpdate },
     });
   }
 
-  async getAllClasses(){
-    return await prisma.classes.findMany({});
+  async getAllClasses() {
+    return await prisma.classes.findMany();
   }
-
-
 }

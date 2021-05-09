@@ -1,31 +1,24 @@
 import prisma from "../mysql/prisma/prismaClientObject.js";
 
 export default class StateService {
-    constructor() {}
+  constructor() {}
 
-async createState(state){
+  async createState(state) {
     return await prisma.states.create({ data: { ...state } });
-}
+  }
 
-async getAllStates(){
-    return await prisma.states.findMany({});
-}
+  async getAllStates() {
+    return await prisma.states.findMany();
+  }
 
-async updateState(data, id){
+  async updateState(state, id) {
     return await prisma.states.update({
-        where: {
-            id: parseInt(id)
-          },
-          data: { ...data }
+      where: { id: parseInt(id) },
+      data: { ...state },
     });
-}
+  }
 
-async deleteState(id){
-    return await prisma.states.delete({
-        where:{
-            id: parseInt(id)
-        }
-    });
+  async deleteState(id) {
+    return await prisma.states.delete({ where: { id: parseInt(id) } });
+  }
 }
-
-}    
