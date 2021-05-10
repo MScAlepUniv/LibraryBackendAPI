@@ -51,9 +51,13 @@ router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
 );
 
-// router.delete("/deletePublication/:id", (req, res) => 
-//   publicationController.deletePublication(req, res)
-// );
+router.delete("/deletePublication/:id", (req, res) => 
+  publicationController.deletePublication(req, res)
+);
+
+router.put("/updatePublication/:id", (req, res) =>
+  publicationController.updatePublication(req, res)
+);
 
 ///////////////////////////////////////////////////
 router.post("/createPublisher", (req, res) =>

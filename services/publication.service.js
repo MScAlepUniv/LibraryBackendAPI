@@ -41,10 +41,58 @@ export default class PublicationService {
     });
   }
 
-  // async deletePublication(id){
-  //   return await prisma.publications.delete({
-  //     where: {id: parseInt(id)}
-  //   });
-  // }
+  async deletePublication(id){
+    return await prisma.publications.delete({
+      where: {id: parseInt(id)}
+    });
+  }
+
+  async updatePublication(data, id){
+    const {
+      ISBN,
+      title,
+      date_of_publishing,
+      publisher_id,
+      class_id,
+      keywords,
+      num_of_pages,
+      subject_id,
+      pirchase_price_copy,
+      for_sale,
+      sale_price_copy,
+      author_id,
+      rate_of_associating,
+    } = data;
+    return await prisma.publications.update({
+      where:{
+        id: parseInt(id)
+      },
+      data: {
+        ISBN,
+        title,
+        date_of_publishing: new Date(date_of_publishing),
+        publisher_id,
+        class_id,
+        keywords,
+        num_of_pages,
+        subject_id,
+        pirchase_price_copy,
+        for_sale: Buffer.from([for_sale]),
+        sale_price_copy,
+      },
+    });
+  }
+
+  async getAllPublications(){
+    return await prisma.publications.findMany({});
+  }
+
+  async getPublication(id){
+    return await prisma.publications.findFirst({
+      where:{
+        id: parseInt(id)
+      }
+    });
+  }
 
 }

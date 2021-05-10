@@ -1140,6 +1140,170 @@
                     "mysql"
                 ]
             }
+        },
+        "/mysql/admin/updatePublication/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "title",
+                                    "author_id",
+                                    "rate_of_associating"
+                                ],
+                                "properties": {
+                                    "ISBN": {
+                                        "type": "integer",
+                                        "example": 4545
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "book title"
+                                    },
+                                    "date_of_publishing": {
+                                        "type": "string",
+                                        "example": "2005/2/13"
+                                    },
+                                    "publisher_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "class_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "keywords": {
+                                        "type": "string",
+                                        "example": "art sport"
+                                    },
+                                    "num_of_pages": {
+                                        "type": "integer",
+                                        "example": 201
+                                    },
+                                    "subject_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "pirchase_price_copy": {
+                                        "type": "integer",
+                                        "example": 500
+                                    },
+                                    "for_sale": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "sale_price_copy": {
+                                        "type": "integer",
+                                        "example": 900
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publication id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deletePublication/{id}": {
+            "delete": {
+                "summary": "Delete a Publication by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publication id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getPublication/{id}": {
+            "get": {
+                "summary": "get a Publication by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publication id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Publication not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getAllPublications": {
+            "get": {
+                "summary": "Get all Publications",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
         }
     }
 }

@@ -57,4 +57,13 @@ router.get("/getSubject/:id", (req, res) =>
   subjectController.getSubject(req, res)
 );
 
+
+router.get("/getAllPublications", (req, res) =>
+  publicationController.getAllPublications(req, res)
+);
+
+router.get("/getPublication/:id", (req, res) =>
+  publicationController.getPublication(req, res)
+);
+
 export default router;
