@@ -21,16 +21,40 @@ router.get("/getAllAuthors", (req, res) =>
   authorController.getAllAuthors(req, res)
 );
 
+router.get("/getAuthor/:id", (req, res) =>
+  authorController.getAuthor(req, res)
+);
+
 router.get("/getAllClasses", (req, res) =>
   classController.getAllClasses(req, res)
+);
+
+router.get("/getClass/:id", (req, res) =>
+  classController.getClass(req, res)
 );
 
 router.get("/getAllPublishers", (req, res) =>
   publisherController.getAllPublishers(req, res)
 );
 
+router.get("/getPublisher/:id", (req, res) =>
+  publisherController.getPublisher(req, res)
+);
+
 router.get("/getAllStates", (req, res) =>
   stateController.getAllStates(req, res)
+);
+
+router.get("/getState/:id", (req, res) =>
+  stateController.getState(req, res)
+);
+
+router.get("/getAllSubjects", (req, res) => 
+  subjectController.getAllSubjects(req, res)
+);
+
+router.get("/getSubject/:id", (req, res) =>
+  subjectController.getSubject(req, res)
 );
 
 export default router;

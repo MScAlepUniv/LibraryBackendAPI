@@ -40,4 +40,11 @@ export default class PublicationService {
       },
     });
   }
+
+  // async deletePublication(id){
+  //   return await prisma.publications.delete({
+  //     where: {id: parseInt(id)}
+  //   });
+  // }
+
 }
