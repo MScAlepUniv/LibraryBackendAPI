@@ -19,6 +19,8 @@ export default class PublicationController {
 
   async deletePublication(req, res){
     try {
+      const publication = await this.publicationService.getPublication(req.params.id);
+      if (publication===null) return res.sendStatus(404);
       await this.publicationService.deletePublication(req.params.id);
       res.send("The publication has been deleted succefully");
     } catch (error) {
@@ -29,6 +31,8 @@ export default class PublicationController {
 
   async updatePublication(req, res){
     try {
+      const publication = await this.publicationService.getPublication(req.params.id);
+      if (publication===null) return res.sendStatus(404);
       const updatedPublication = await this.publicationService.updatePublication(req.body, req.params.id);
       res.send(updatedPublication);
     } catch (error) {

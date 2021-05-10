@@ -38,6 +38,8 @@ async getState(req, res){
 
 async updateState(req, res){
     try {
+        const state = await this.stateService.getState(req.params.id);
+        if (state===null) return res.sendStatus(404);
         const updatedState = await this.stateService.updateState(req.body, req.params.id);
         res.send(updatedState);
       } catch (error) {
@@ -48,6 +50,8 @@ async updateState(req, res){
 
 async deleteState(req, res){
     try {
+        const state = await this.stateService.getState(req.params.id);
+        if (state===null) return res.sendStatus(404);
         const deletedState = await this.stateService.deleteState(req.params.id);
         res.send("The State ("+deletedState["state_type"]+") has been Deleted succesfully");
       } catch (error) {

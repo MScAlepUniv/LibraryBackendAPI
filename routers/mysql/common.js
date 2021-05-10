@@ -6,16 +6,18 @@ import PublicationController from "../../controllers/publication.controller.js";
 import PublisherController from "../../controllers/publisher.controller.js";
 import SubjectController from "../../controllers/subject.controller.js";
 import StateController from "../../controllers/state.controller.js";
+import CopyController from "../../controllers/copy.controller.js";
 
 const router = express.Router();
 
-const employeeController = new EmployeeController();
-const authorController = new AuthorController();
-const classController = new ClassController();
+const employeeController    = new EmployeeController();
+const authorController      = new AuthorController();
+const classController       = new ClassController();
 const publicationController = new PublicationController();
-const publisherController = new PublisherController();
-const subjectController = new SubjectController();
-const stateController = new StateController();
+const publisherController   = new PublisherController();
+const subjectController     = new SubjectController();
+const stateController       = new StateController();
+const copyController        = new CopyController();
 
 router.get("/getAllAuthors", (req, res) =>
   authorController.getAllAuthors(req, res)
@@ -66,4 +68,11 @@ router.get("/getPublication/:id", (req, res) =>
   publicationController.getPublication(req, res)
 );
 
+router.get("/getCopy/:id", (req, res) =>
+  copyController.getCopy(req, res)
+);
+
+router.get("/getAllCopies", (req, res) =>
+  copyController.getAllCopies(req, res)
+);
 export default router;

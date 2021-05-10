@@ -103,4 +103,12 @@ router.delete("/deleteState/:id", (req, res) =>
 router.post("/createCopy", (req, res) =>
   copyController.createCopy(req, res)
 );
+
+router.put("/updateCopy/:id", (req, res) =>
+  copyController.updateCopy(req, res)
+);
+
+router.delete("/deleteCopy/:id", (req, res) =>
+  copyController.deleteCopy(req, res)
+);
 export default router;

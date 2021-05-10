@@ -400,6 +400,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "Author to update not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -427,6 +430,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Author to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -567,6 +573,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "Publisher to update not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -594,6 +603,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Publisher to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -669,6 +681,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Class to update not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -746,6 +761,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "Class to delete not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -821,6 +839,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "Subject to update not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -848,6 +869,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Subject to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -1020,6 +1044,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "State to update not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -1047,6 +1074,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "State to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -1220,6 +1250,9 @@
                     "200": {
                         "description": "Ok"
                     },
+                    "404":{
+                        "description": "Publication to update not found"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
@@ -1247,6 +1280,9 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Publication to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"
@@ -1295,6 +1331,188 @@
                 "responses": {
                     "200": {
                         "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/createCopy": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "publication_id",
+                                    "state_id",
+                                    "current_situation"
+                                ],
+                                "properties": {
+                                    "publication_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "state_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "current_situation": {
+                                        "type": "string",
+                                        "example": "avialable"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getCopy/{id}": {
+            "get": {
+                "summary": "get a Copy by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Copy id to get",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Copy not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/common/getAllCopies": {
+            "get": {
+                "summary": "Get all Copies",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/updateCopy/{id}": {
+            "put": {
+                "summary": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "publication_id",
+                                    "state_id",
+                                    "current_situation"
+                                ],
+                                "properties": {
+                                    "publication_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "state_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "current_situation": {
+                                        "type": "string",
+                                        "example": "avialable"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Copy id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Copy to update not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "tags": [
+                    "mysql"
+                ]
+            }
+        },
+        "/mysql/admin/deleteCopy/{id}": {
+            "delete": {
+                "summary": "Delete a Copy by its id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Copy id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "404":{
+                        "description": "Copy to delete not found"
                     },
                     "500": {
                         "description": "Internal Server Error"

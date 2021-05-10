@@ -38,8 +38,8 @@ export default class ClassController {
 
   async updateSubject(req, res){
     try {
-      // const subjectData = await this.subjectService.getSubject(req.params.id);
-      // res.send(subjectData);
+      const subject = await this.subjectService.getSubject(req.params.id);
+      if (subject===null) return res.sendStatus(404);
       const updatedSubject = await this.subjectService.updateSubject(req.body, req.params.id);
       res.send(updatedSubject);
     } catch (error) {
@@ -50,6 +50,8 @@ export default class ClassController {
 
   async deleteSubject(req, res){
     try {
+      const subject = await this.subjectService.getSubject(req.params.id);
+      if (subject===null) return res.sendStatus(404);
       await this.subjectService.deleteSubject(req.params.id);
       res.send("The Subject has been Deleted succesfully");
     } catch (error) {

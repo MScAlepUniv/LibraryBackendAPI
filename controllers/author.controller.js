@@ -39,6 +39,8 @@ export default class AuthorController {
 
   async deleteAuthor(req, res){
     try{
+      const author = await this.authorService.getAuthor(req.params.id);
+      if (author===null) return res.sendStatus(404);
       const deletedAuthor = await this.authorService.deleteAuthor(req.params.id);
       res.send("The author ("+deletedAuthor["name"]+") has been Deleted succesfully");
     } catch (error){
@@ -49,6 +51,8 @@ export default class AuthorController {
 
   async updateAuthor(req, res){
     try{
+      const author = await this.authorService.getAuthor(req.params.id);
+      if (author===null) return res.sendStatus(404);
       const updatedAuthor = await this.authorService.updateAuthor(req.body, req.params.id);
       res.send(updatedAuthor);
     } catch (error){

@@ -17,7 +17,8 @@ export default class ClassController {
 
   async deleteClass(req, res) {
     try{
-      // console.log(req.params.id);
+      const aClass = await this.classService.getClass(req.params.id);
+      if (aClass===null) return res.sendStatus(404);
       const deletedClass = await this.classService.deleteClass(req.params.id);
       res.send("The class ("+deletedClass["class_name"]+") has been Deleted succesfully");
     } catch (error){
@@ -28,6 +29,8 @@ export default class ClassController {
 
   async updateClass(req, res){
     try{
+      const aClass = await this.classService.getClass(req.params.id);
+      if (aClass===null) return res.sendStatus(404);
       const updatedClass = await this.classService.updateClass(req.body, req.params.id);
       res.send(updatedClass);
     } catch (error){
