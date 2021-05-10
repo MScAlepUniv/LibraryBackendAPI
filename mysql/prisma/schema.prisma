@@ -76,7 +76,7 @@ model employees {
   pass                           String     @db.VarChar(20)
   is_admin                       Boolean    @default(dbgenerated("b'0'")) @db.Bit(1)
   borrows                        borrows[]
-  requests                       requests[]
+  requests                       requests[] @ignore
 }
 
 model invoices {
