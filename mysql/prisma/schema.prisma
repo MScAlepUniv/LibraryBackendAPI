@@ -9,14 +9,14 @@ datasource db {
 
 model author_publication {
   author_id           Int
-  published_id        Int
+  publication_id      Int
   rate_of_associating Int
   authors             authors      @relation(fields: [author_id], references: [id])
-  publications        publications @relation(fields: [published_id], references: [id])
+  publications        publications @relation(fields: [publication_id], references: [id])
 
-  @@id([author_id, published_id])
+  @@id([author_id, publication_id])
   @@index([author_id], name: "Author_id")
-  @@index([published_id], name: "Published_id")
+  @@index([publication_id], name: "Published_id")
 }
 
 model authors {
@@ -38,10 +38,10 @@ model availabilities {
 }
 
 model classes {
-  id             Int              @id @default(autoincrement()) @map("_id")
-  class_name     String           @db.VarChar(50)
-  discountoffers discountoffers[]
-  publications   publications[]
+  id              Int               @id @default(autoincrement()) @map("_id")
+  class_name      String            @db.VarChar(50)
+  discount_offers discount_offers[]
+  publications    publications[]
 }
 
 model copies {
@@ -56,19 +56,6 @@ model copies {
 
   @@index([publication_id], name: "Published_id")
   @@index([state_id], name: "State_id")
-}
-
-model discountoffers {
-  id               Int          @id @default(autoincrement()) @map("_id")
-  rate_of_discount Int
-  quantity         Int
-  class_id         Int
-  publisher_id     Int
-  classes          classes      @relation(fields: [class_id], references: [id])
-  publications     publications @relation(fields: [publisher_id], references: [id])
-
-  @@index([publisher_id], name: "Publisher_id")
-  @@index([class_id], name: "class_id")
 }
 
 model employees {
@@ -89,7 +76,7 @@ model employees {
   pass                           String     @db.VarChar(20)
   is_admin                       Boolean    @default(dbgenerated("b'0'")) @db.Bit(1)
   borrows                        borrows[]
-  requests                       requests[] @ignore
+  requests                       requests[]
 }
 
 model invoices {
@@ -123,7 +110,7 @@ model publications {
   subjects            subjects?            @relation(fields: [subject_id], references: [id])
   author_publication  author_publication[]
   copies              copies[]
-  discountoffers      discountoffers[]
+  discount_offers     discount_offers[]
 
   @@index([class_id], name: "Class_id")
   @@index([publisher_id], name: "publisher_id")
@@ -250,4 +237,17 @@ model visitors {
   customer_accounts customer_accounts[]
 
   @@index([visitor_card_id], name: "visitor_card_id")
+}
+
+model discount_offers {
+  id               Int          @id @default(autoincrement()) @map("_id")
+  rate_of_discount Int
+  quantity         Int
+  class_id         Int
+  publication_id   Int
+  classes          classes      @relation(fields: [class_id], references: [id])
+  publications     publications @relation(fields: [publication_id], references: [id])
+
+  @@index([publication_id], name: "Publisher_id")
+  @@index([class_id], name: "class_id")
 }
