@@ -6,16 +6,18 @@ import PublicationController from "../../controllers/publication.controller.js";
 import PublisherController from "../../controllers/publisher.controller.js";
 import SubjectController from "../../controllers/subject.controller.js";
 import StateController from "../../controllers/state.controller.js";
+import CopyController from "../../controllers/copy.controller.js";
 
 const router = express.Router();
 
-const employeeController = new EmployeeController();
-const authorController = new AuthorController();
-const classController = new ClassController();
+const employeeController    = new EmployeeController();
+const authorController      = new AuthorController();
+const classController       = new ClassController();
 const publicationController = new PublicationController();
-const publisherController = new PublisherController();
-const subjectController = new SubjectController();
-const stateController = new StateController();
+const publisherController   = new PublisherController();
+const subjectController     = new SubjectController();
+const stateController       = new StateController();
+const copyController        = new CopyController();
 
 router.post("/createEmployee", (req, res) =>
   employeeController.createEmployee(req, res)
@@ -98,4 +100,7 @@ router.delete("/deleteState/:id", (req, res) =>
   stateController.deleteState(req, res)
 );
 ///////////////////////////////////////////////////
+router.post("/createCopy", (req, res) =>
+  copyController.createCopy(req, res)
+);
 export default router;
