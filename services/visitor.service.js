@@ -4,7 +4,9 @@ export default class VisitorService {
   constructor() {}
 
   async getVisitorByName(user_name) {
-    return await prisma.visitors.findFirst({ where: { user_name } });
+    return await prisma.visitors.findFirst({
+      where: { user_name, is_active: true },
+    });
   }
 
   async createVisitor(visitor) {

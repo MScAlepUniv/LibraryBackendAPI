@@ -41,13 +41,15 @@ export default class PublicationService {
     });
   }
 
-  async deletePublication(id){
-    return await prisma.publications.delete({
-      where: {id: parseInt(id)}
+  async deletePublication(id) {
+    return await prisma.publications.update({
+      where: { id: parseInt(id) },
+      data: { is_deleted: true },
     });
   }
 
-  async updatePublication(data, id){
+  async updatePublication(data, id, author) {
+    console.log(author);
     const {
       ISBN,
       title,
@@ -60,12 +62,10 @@ export default class PublicationService {
       pirchase_price_copy,
       for_sale,
       sale_price_copy,
-      author_id,
-      rate_of_associating,
     } = data;
     return await prisma.publications.update({
-      where:{
-        id: parseInt(id)
+      where: {
+        id: parseInt(id),
       },
       data: {
         ISBN,
@@ -83,16 +83,13 @@ export default class PublicationService {
     });
   }
 
-  async getAllPublications(){
-    return await prisma.publications.findMany({});
+  async getAllPublications() {
+    return await prisma.publications.findMany({ where: { is_deleted: false } });
   }
 
-  async getPublication(id){
+  async getPublication(id) {
     return await prisma.publications.findFirst({
-      where:{
-        id: parseInt(id)
-      }
+      where: { AND: [{ id: parseInt(id) }, { is_deleted: false }] },
     });
   }
-
 }

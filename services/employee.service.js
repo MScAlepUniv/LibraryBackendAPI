@@ -4,7 +4,9 @@ export default class EmployeeService {
   constructor() {}
 
   async getEmployeeByName(user_name) {
-    return await prisma.employees.findFirst({ where: { user_name } });
+    return await prisma.employees.findFirst({
+      where: { user_name, is_active: true },
+    });
   }
 
   async createEmployee(employee) {

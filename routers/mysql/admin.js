@@ -10,14 +10,14 @@ import CopyController from "../../controllers/copy.controller.js";
 
 const router = express.Router();
 
-const employeeController    = new EmployeeController();
-const authorController      = new AuthorController();
-const classController       = new ClassController();
+const employeeController = new EmployeeController();
+const authorController = new AuthorController();
+const classController = new ClassController();
 const publicationController = new PublicationController();
-const publisherController   = new PublisherController();
-const subjectController     = new SubjectController();
-const stateController       = new StateController();
-const copyController        = new CopyController();
+const publisherController = new PublisherController();
+const subjectController = new SubjectController();
+const stateController = new StateController();
+const copyController = new CopyController();
 
 router.post("/createEmployee", (req, res) =>
   employeeController.createEmployee(req, res)
@@ -53,7 +53,7 @@ router.post("/createPublication", (req, res) =>
   publicationController.createPublication(req, res)
 );
 
-router.delete("/deletePublication/:id", (req, res) => 
+router.delete("/deletePublication/:id", (req, res) =>
   publicationController.deletePublication(req, res)
 );
 
@@ -79,11 +79,11 @@ router.post("/createSubject", (req, res) =>
   subjectController.createSubject(req, res)
 );
 
-router.put("/updateSubject/:id", (req, res) => 
+router.put("/updateSubject/:id", (req, res) =>
   subjectController.updateSubject(req, res)
 );
 
-router.delete("/deleteSubject/:id", (req, res) => 
+router.delete("/deleteSubject/:id", (req, res) =>
   subjectController.deleteSubject(req, res)
 );
 
@@ -100,9 +100,7 @@ router.delete("/deleteState/:id", (req, res) =>
   stateController.deleteState(req, res)
 );
 ///////////////////////////////////////////////////
-router.post("/createCopy", (req, res) =>
-  copyController.createCopy(req, res)
-);
+router.post("/createCopy", (req, res) => copyController.createCopy(req, res));
 
 router.put("/updateCopy/:id", (req, res) =>
   copyController.updateCopy(req, res)

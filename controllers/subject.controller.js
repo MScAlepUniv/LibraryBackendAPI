@@ -15,7 +15,7 @@ export default class ClassController {
     }
   }
 
-  async getAllSubjects(req, res){
+  async getAllSubjects(req, res) {
     try {
       const allSubjects = await this.subjectService.getAllSubjects();
       res.send(allSubjects);
@@ -25,22 +25,25 @@ export default class ClassController {
     }
   }
 
-  async getSubject(req, res){
-    try{
+  async getSubject(req, res) {
+    try {
       const subject = await this.subjectService.getSubject(req.params.id);
       if (subject === null) return res.sendStatus(404);
       res.send(subject);
-    } catch (error){
+    } catch (error) {
       console.log(error);
       res.sendStatus(500);
     }
   }
 
-  async updateSubject(req, res){
+  async updateSubject(req, res) {
     try {
       const subject = await this.subjectService.getSubject(req.params.id);
-      if (subject===null) return res.sendStatus(404);
-      const updatedSubject = await this.subjectService.updateSubject(req.body, req.params.id);
+      if (subject === null) return res.sendStatus(404);
+      const updatedSubject = await this.subjectService.updateSubject(
+        req.body,
+        req.params.id
+      );
       res.send(updatedSubject);
     } catch (error) {
       console.log(error);
@@ -48,16 +51,15 @@ export default class ClassController {
     }
   }
 
-  async deleteSubject(req, res){
+  async deleteSubject(req, res) {
     try {
       const subject = await this.subjectService.getSubject(req.params.id);
-      if (subject===null) return res.sendStatus(404);
+      if (subject === null) return res.sendStatus(404);
       await this.subjectService.deleteSubject(req.params.id);
-      res.send("The Subject has been Deleted succesfully");
+      res.send("The Subject has been Deleted successfully");
     } catch (error) {
       console.log(error);
       res.sendStatus(500);
     }
   }
-
 }

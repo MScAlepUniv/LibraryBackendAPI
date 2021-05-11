@@ -45,10 +45,11 @@ model classes {
 }
 
 model copies {
-  copy_id             Int                   @id @default(autoincrement())
+  id                  Int                   @id @default(autoincrement()) @map("_id")
   publication_id      Int
   state_id            Int
   current_situation   String                @db.VarChar(50)
+  is_deleted          Boolean               @default(dbgenerated("b'0'")) @db.Bit(1)
   publications        publications          @relation(fields: [publication_id], references: [id])
   states              states                @relation(fields: [state_id], references: [id])
   borrows             borrows[]
@@ -75,6 +76,7 @@ model employees {
   user_name                      String     @db.VarChar(50)
   pass                           String     @db.VarChar(20)
   is_admin                       Boolean    @default(dbgenerated("b'0'")) @db.Bit(1)
+  is_active                      Boolean    @default(dbgenerated("b'1'")) @db.Bit(1)
   borrows                        borrows[]
   requests                       requests[] @ignore
 }
@@ -105,6 +107,7 @@ model publications {
   pirchase_price_copy Int?
   for_sale            Bytes?               @db.Bit(5)
   sale_price_copy     Int?
+  is_deleted          Boolean              @default(dbgenerated("b'0'")) @db.Bit(1)
   classes             classes?             @relation(fields: [class_id], references: [id])
   publishers          publishers?          @relation(fields: [publisher_id], references: [id])
   subjects            subjects?            @relation(fields: [subject_id], references: [id])
@@ -179,7 +182,7 @@ model borrows {
   type_borrow        String    @db.VarChar(50)
   date_return        DateTime  @db.Date
   date_actual_return DateTime  @db.Date
-  copies             copies    @relation(fields: [copy_id], references: [copy_id])
+  copies             copies    @relation(fields: [copy_id], references: [id])
   employees          employees @relation(fields: [employee_id], references: [id])
 
   @@index([copy_id], name: "Copy_id")
@@ -208,7 +211,7 @@ model ownership_transfers {
   invoice_id                                           Int
   refund_id                                            Int
   availabilities                                       availabilities @relation(fields: [availability_type_id], references: [id])
-  copies                                               copies         @relation(fields: [copy_id], references: [copy_id])
+  copies                                               copies         @relation(fields: [copy_id], references: [id])
   invoices                                             invoices       @relation(fields: [invoice_id], references: [id])
   refunds_ownership_transfers_refund_idTorefunds       refunds        @relation("ownership_transfers_refund_idTorefunds", fields: [refund_id], references: [id])
   refunds_ownership_transfersTorefunds_old_transfer_id refunds[]      @relation("ownership_transfersTorefunds_old_transfer_id")
@@ -233,6 +236,7 @@ model visitors {
   qualification     String              @db.VarChar(100)
   user_name         String?             @db.VarChar(50)
   pass              String?             @db.VarChar(20)
+  is_active         Boolean             @default(dbgenerated("b'1'")) @db.Bit(1)
   subscriptioncards subscriptioncards   @relation(fields: [visitor_card_id], references: [id])
   customer_accounts customer_accounts[]
 
@@ -245,6 +249,7 @@ model discount_offers {
   quantity         Int
   class_id         Int
   publication_id   Int
+  is_deleted       Boolean      @default(dbgenerated("b'0'")) @db.Bit(1)
   classes          classes      @relation(fields: [class_id], references: [id])
   publications     publications @relation(fields: [publication_id], references: [id])
 

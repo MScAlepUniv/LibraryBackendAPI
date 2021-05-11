@@ -11,7 +11,7 @@ export default class AuthorService {
     return await prisma.publishers.findMany({});
   }
 
-  async getPublisher(id){
+  async getPublisher(id) {
     return await prisma.publishers.findFirst({
       where: { id: parseInt(id) },
     });
@@ -22,9 +22,5 @@ export default class AuthorService {
       where: { id: parseInt(id) },
       data: { ...aPublisherToUpdate },
     });
-  }
-
-  async deletePublisher(id) {
-    return await prisma.publishers.delete({ where: { id: parseInt(id) } });
   }
 }

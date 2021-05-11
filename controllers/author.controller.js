@@ -15,47 +15,55 @@ export default class AuthorController {
     }
   }
 
-  async getAllAuthors(req, res){
-    try{
-      const allAuthers = await this.authorService.getAllAuthors();
-      res.send(allAuthers);
-    } catch (error){
+  async getAllAuthors(req, res) {
+    try {
+      const authors = await this.authorService.getAllAuthors();
+      res.send(authors);
+    } catch (error) {
       console.log(error);
       res.sendStatus(500);
     }
   }
 
-  async getAuthor(req, res){
-    try{
+  async getAuthor(req, res) {
+    try {
       const author = await this.authorService.getAuthor(req.params.id);
       if (author === null) return res.sendStatus(404);
       res.send(author);
-    } catch (error){
-      console.log(error);
-      res.sendStatus(500);
-    }
-  }
-  
-
-  async deleteAuthor(req, res){
-    try{
-      const author = await this.authorService.getAuthor(req.params.id);
-      if (author===null) return res.sendStatus(404);
-      const deletedAuthor = await this.authorService.deleteAuthor(req.params.id);
-      res.send("The author ("+deletedAuthor["name"]+") has been Deleted succesfully");
-    } catch (error){
+    } catch (error) {
       console.log(error);
       res.sendStatus(500);
     }
   }
 
-  async updateAuthor(req, res){
-    try{
+  async deleteAuthor(req, res) {
+    try {
       const author = await this.authorService.getAuthor(req.params.id);
-      if (author===null) return res.sendStatus(404);
-      const updatedAuthor = await this.authorService.updateAuthor(req.body, req.params.id);
+      if (author === null) return res.sendStatus(404);
+      const deletedAuthor = await this.authorService.deleteAuthor(
+        req.params.id
+      );
+      res.send(
+        "The author (" +
+          deletedAuthor["name"] +
+          ") has been Deleted succesfully"
+      );
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+
+  async updateAuthor(req, res) {
+    try {
+      const author = await this.authorService.getAuthor(req.params.id);
+      if (author === null) return res.sendStatus(404);
+      const updatedAuthor = await this.authorService.updateAuthor(
+        req.body,
+        req.params.id
+      );
       res.send(updatedAuthor);
-    } catch (error){
+    } catch (error) {
       console.log(error);
       res.sendStatus(500);
     }

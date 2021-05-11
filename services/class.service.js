@@ -2,7 +2,7 @@ import prisma from "../mysql/prisma/prismaClientObject.js";
 
 export default class ClassService {
   constructor() {}
-  
+
   async createClass(aClass) {
     return await prisma.classes.create({ data: { ...aClass } });
   }
@@ -22,12 +22,7 @@ export default class ClassService {
     return await prisma.classes.findMany();
   }
 
-  async getClass(id){
-    return await prisma.classes.findFirst({
-      where: {
-        id: parseInt(id)
-      }
-    });
+  async getClass(id) {
+    return await prisma.classes.findFirst({ where: { id: parseInt(id) } });
   }
-
 }
